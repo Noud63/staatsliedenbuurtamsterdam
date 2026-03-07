@@ -1,0 +1,324 @@
+// hooks/usePostActions.js
+
+import { mutate } from "swr";
+import {
+  optimisticPostLikeUpdate,
+  optimisticPostLikeUpdateSinglePost,
+  optimisticCommentLikeUpdate,
+  optimisticCommentLikeUpdateSinglePost,
+  optimisticDeleteComment,
+  optimisticDeleteCommentSinglePost,
+  optimisticDeletePost,
+  optimisticDeleteSinglePost,
+  optimisticAddComment,
+  optimisticCommentEditUpdate,
+  optimisticCommentEditUpdateSinglePost,
+} from "@/utils/optimisticUpdate";
+import { revalidatePostCaches } from "@/utils/revalidatePost";
+
+//Mutate all caches that contain the post (feed, posts by user id, single post) with the same optimistic update function
+export const mutatePostCaches = (postId, updater) => {
+  mutate(
+    (key) =>
+      typeof key === "string" &&
+      (key === "/api/getposts" ||
+        key.startsWith("/api/getposts/postsByUserId/") ||
+        key === `/api/getSinglePost/${postId}`),
+    updater,
+    {
+      revalidate: false,
+      rollbackOnError: true,
+    },
+  );
+};
+
+// const updatePosts = (data, updateFn) => {
+//   if (!data) return data;
+
+//   // feed arrays
+//   if (Array.isArray(data)) {
+//     return data.map(updateFn);
+//   }
+
+//   // single post
+//   return updateFn(data);
+// };
+
+// const updateComment = (post, commentId, commentUpdater) => {
+//   if (!post.comments) return post;
+
+//   return {
+//     ...post,
+//     comments: post.comments.map((c) =>
+//       c._id === commentId ? commentUpdater(c) : c,
+//     ),
+//   };
+// };
+
+
+// usePostActions hook to handle all optimistic updates for posts and comments
+export function usePostActions(postOrPosts) {
+
+  const getPostId = (post) => post._id;
+
+  // ------------------------------------------------------------------------
+  // ------------------------------ LIKE POST -------------------------------
+  // ------------------------------------------------------------------------
+
+  const likePost = async (post) => {
+    const postId = getPostId(post);
+
+    // Optimistic update
+    mutatePostCaches(postId, (data) => {
+      // If it's an array (feed)
+      if (Array.isArray(data)) {
+        if (!data[0]?.comments) return data; // Ensure we are dealing with posts, not notifications
+        return data.map((p) =>
+          p._id === postId
+            ? {
+                ...p,
+                likesCount: p.likesCount + (p.likedByUser ? -1 : 1),
+                likedByUser: !p.likedByUser,
+              }
+            : p,
+        );
+      }
+
+      // If it's a single post
+      if (data?._id === postId) {
+        return {
+          ...data,
+          likesCount: data.likesCount + (data.likedByUser ? -1 : 1),
+          likedByUser: !data.likedByUser,
+        };
+      }
+
+      return data;
+    });
+
+    await fetch(`/api/posts/${postId}/like`, {
+      method: "POST",
+    });
+  };
+
+  // ---------------------------------------------------------------------
+  // --------------------------- DELETE POST -----------------------------
+  // ---------------------------------------------------------------------
+
+  const deletePost = async (postId) => {
+    mutatePostCaches(postId, (data) => {
+      // If it's an array (feed)
+      if (Array.isArray(data)) {
+        return data.filter((p) => p._id !== postId);
+      }
+
+      // If it's a single post
+      if (data?._id === postId) {
+        return null; // or you could return a placeholder indicating it's deleted
+      }
+      return data;
+    });
+    await fetch(`/api/deletepost/${postId}`, {
+      method: "DELETE",
+    });
+  };
+
+  // ---------------------------------------------------------------------
+  // --------------------------- LIKE COMMENT ----------------------------
+  // ---------------------------------------------------------------------
+
+  const likeComment = async (commentId, post) => {
+    const postId = getPostId(post);
+
+    mutatePostCaches(postId, (data) => {
+      if (!data) return data;
+      // If it's an array (feed)
+      if (Array.isArray(data)) {
+        return data.map((p) => {
+          if (p._id !== postId) return p;
+
+          return {
+            ...p,
+            comments: p.comments.map((comment) =>
+              comment._id === commentId // target only the comment being liked
+                ? {
+                    ...comment,
+                    likesCount:
+                      comment.likesCount + (comment.likedByUser ? -1 : 1),
+                    likedByUser: !comment.likedByUser,
+                  }
+                : comment,
+            ),
+          };
+        });
+      } else if (data._id === postId) {
+        return {
+          ...data,
+          comments: data.comments.map((comment) =>
+            comment._id === commentId
+              ? {
+                  ...comment,
+                  likesCount:
+                    comment.likesCount + (comment.likedByUser ? -1 : 1),
+                  likedByUser: !comment.likedByUser,
+                }
+              : comment,
+          ),
+        };
+      }
+      return data;
+    });
+    const res = await fetch(`/api/comments/${commentId}/like`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ commentId, postId }),
+    });
+
+    if (!res.ok) throw new Error("Failed to like comment");
+  };
+
+  // ---------------------------------------------------------------------
+  // --------------------------- DELETE COMMENT --------------------------
+  // ---------------------------------------------------------------------
+
+  const deleteComment = async (commentId, post) => {
+    const postId = getPostId(post);
+    mutatePostCaches(postId, (data) => {
+      if (!data) return data;
+      // If it's an array (feed)
+      if (Array.isArray(data)) {
+        return data.map((p) => {
+          if (p._id === postId) {
+            return {
+              ...p,
+              comments: p.comments.filter((comment) => {
+                return comment._id !== commentId;
+              }),
+            };
+          }
+          return post;
+        });
+      } else if (data._id === postId) {
+        return {
+          ...data,
+          comments: data.comments.filter((comment) => {
+            return comment._id !== commentId;
+          }),
+        };
+      }
+      return data;
+    });
+
+    const res = await fetch(`/api/deleteComment/${commentId}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) throw new Error("Failed to delete comment");
+  };
+
+  // ---------------------------------------------------------------------
+  // --------------------------- ADD COMMENT -----------------------------
+  // ---------------------------------------------------------------------
+
+  const addComment = async (post, postId, tempComment) => {
+  if (!post || !postId) return;
+
+  mutatePostCaches(postId, (data) => {
+    if (!data) return data;
+    console.log("Data is:", data)
+    // FEED CACHE (array)
+    if (Array.isArray(data)) {
+      return  data.map((post) => {
+        if (post._id !== postId) return post;
+
+        return {
+        ...post,
+        comments: [
+          ...(post.comments || []),
+          {
+            ...tempComment,
+            _id: `temp-${Date.now()}`, // temporary id
+            likesCount: 0,
+            createdAt: new Date().toISOString(),
+          },
+        ],
+      };
+      
+      })
+      
+    }
+
+    // SINGLE POST CACHE
+    if (data._id === postId) {
+      return {
+        ...data,
+        comments: [...(data.comments || []), tempComment],
+      };
+    }
+
+    return data;
+  });
+
+  try {
+    const res = await fetch("/api/comments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tempComment),
+    });
+
+    if (!res.ok) throw new Error("Failed to add comment");
+  } catch (err) {
+    console.error("Failed to add comment:", err);
+  } finally {
+    revalidatePostCaches(postId, post.userId);
+  }
+};
+
+  // ---------------------------------------------------------------------
+  // -------------------------- EDIT COMMENT -----------------------------
+  // ---------------------------------------------------------------------
+
+  const editComment = async (commentId, post, formData, newContent) => {
+    const postId = post._id;
+
+    // Optimistic UI update
+    mutate(
+      "/api/getposts",
+      optimisticCommentEditUpdate(commentId, newContent),
+      false,
+    );
+    mutate(
+      `/api/getposts/postsByUserId/${post.userId}`,
+      optimisticCommentEditUpdate(commentId, newContent),
+      false,
+    );
+    mutate(
+      `/api/getSinglePost/${postId}`,
+      optimisticCommentEditUpdateSinglePost(commentId, newContent),
+      false,
+    );
+
+    try {
+      // ✅ Send FormData directly (do NOT set Content-Type manually!)
+      const res = await fetch(`/api/editComment/${commentId}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Failed to edit comment");
+
+      // ✅ Revalidate after success
+      await revalidatePostCaches(postId, post.userId);
+    } catch (err) {
+      console.error("Edit comment failed:", err);
+    }
+  };
+
+  return {
+    likePost,
+    likeComment,
+    addComment,
+    deleteComment,
+    deletePost,
+    editComment,
+  };
+}
