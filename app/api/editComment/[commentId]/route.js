@@ -24,8 +24,6 @@ export const PUT = async (request, { params }) => {
     }
 
     const content = await formData.get("commentContent");
-
-    console.log("Content:", content); 
   
     const commentData = {
       comment: content,
@@ -39,7 +37,7 @@ export const PUT = async (request, { params }) => {
       { new: true }
     );
 
-    console.log("Updated Post:", updatedPost);  
+    // console.log("Updated Post:", JSON.stringify(updatedPost, null, 2));  
 
     return new Response(
       JSON.stringify(updatedPost, { message: "Comment updated successfully!" }, {status: 200}),

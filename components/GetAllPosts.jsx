@@ -16,6 +16,8 @@ const { data, error, isLoading } = useSWR("/api/getposts", fetcher, {
     revalidateOnReconnect: true, // Refetch when internet reconnects
   });
 
+  // console.log("Data:", data)
+
    if (error)
      return (
        <div className="mx-auto mt-8 flex min-h-[200px] w-full max-w-[620px] flex-col items-center justify-center rounded-lg text-2xl text-white">

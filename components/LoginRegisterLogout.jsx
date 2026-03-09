@@ -15,7 +15,7 @@ const LoginRegisterLogout = () => {
   const t = useTranslations("auth");
 
   return (
-    <div className="flex flex-row items-center text-white max-md:mt-4 justify-between max-xsm:h-[50px] max-md:border-b-2">
+    <div className="flex flex-row items-center w-max text-white max-md:mt-4 justify-between max-xsm:h-[50px] max-md:border-b-2 mr-8 max-md:w-full">
       <Hamburger />
 
       <div className="flex flex-row gap-4">
@@ -29,7 +29,7 @@ const LoginRegisterLogout = () => {
 
         <div className="flex items-center justify-center gap-10">
           {!session?.user ? (
-            <Link href="/login" className="flex w-full justify-end">
+            <Link href="/login" className="flex w-full justify-end ">
               {t("inloggen")}
             </Link>
           ) : (

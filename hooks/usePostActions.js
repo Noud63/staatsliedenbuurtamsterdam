@@ -1,19 +1,5 @@
-// hooks/usePostActions.js
-
 import { mutate } from "swr";
-import {
-  optimisticPostLikeUpdate,
-  optimisticPostLikeUpdateSinglePost,
-  optimisticCommentLikeUpdate,
-  optimisticCommentLikeUpdateSinglePost,
-  optimisticDeleteComment,
-  optimisticDeleteCommentSinglePost,
-  optimisticDeletePost,
-  optimisticDeleteSinglePost,
-  optimisticAddComment,
-  optimisticCommentEditUpdate,
-  optimisticCommentEditUpdateSinglePost,
-} from "@/utils/optimisticUpdate";
+
 import { revalidatePostCaches } from "@/utils/revalidatePost";
 
 //Mutate all caches that contain the post (feed, posts by user id, single post) with the same optimistic update function
@@ -24,6 +10,7 @@ export const mutatePostCaches = (postId, updater) => {
       (key === "/api/getposts" ||
         key.startsWith("/api/getposts/postsByUserId/") ||
         key === `/api/getSinglePost/${postId}`),
+
     updater,
     {
       revalidate: false,
@@ -32,33 +19,9 @@ export const mutatePostCaches = (postId, updater) => {
   );
 };
 
-// const updatePosts = (data, updateFn) => {
-//   if (!data) return data;
-
-//   // feed arrays
-//   if (Array.isArray(data)) {
-//     return data.map(updateFn);
-//   }
-
-//   // single post
-//   return updateFn(data);
-// };
-
-// const updateComment = (post, commentId, commentUpdater) => {
-//   if (!post.comments) return post;
-
-//   return {
-//     ...post,
-//     comments: post.comments.map((c) =>
-//       c._id === commentId ? commentUpdater(c) : c,
-//     ),
-//   };
-// };
-
 
 // usePostActions hook to handle all optimistic updates for posts and comments
 export function usePostActions(postOrPosts) {
-
   const getPostId = (post) => post._id;
 
   // ------------------------------------------------------------------------
@@ -72,7 +35,6 @@ export function usePostActions(postOrPosts) {
     mutatePostCaches(postId, (data) => {
       // If it's an array (feed)
       if (Array.isArray(data)) {
-        if (!data[0]?.comments) return data; // Ensure we are dealing with posts, not notifications
         return data.map((p) =>
           p._id === postId
             ? {
@@ -101,6 +63,7 @@ export function usePostActions(postOrPosts) {
     });
   };
 
+
   // ---------------------------------------------------------------------
   // --------------------------- DELETE POST -----------------------------
   // ---------------------------------------------------------------------
@@ -122,6 +85,7 @@ export function usePostActions(postOrPosts) {
       method: "DELETE",
     });
   };
+
 
   // ---------------------------------------------------------------------
   // --------------------------- LIKE COMMENT ----------------------------
@@ -151,6 +115,7 @@ export function usePostActions(postOrPosts) {
             ),
           };
         });
+        // If it's a single post
       } else if (data._id === postId) {
         return {
           ...data,
@@ -177,6 +142,7 @@ export function usePostActions(postOrPosts) {
     if (!res.ok) throw new Error("Failed to like comment");
   };
 
+
   // ---------------------------------------------------------------------
   // --------------------------- DELETE COMMENT --------------------------
   // ---------------------------------------------------------------------
@@ -191,12 +157,12 @@ export function usePostActions(postOrPosts) {
           if (p._id === postId) {
             return {
               ...p,
-              comments: p.comments.filter((comment) => {
-                return comment._id !== commentId;
-              }),
+              comments: p.comments.filter(
+                (comment) => comment._id !== commentId,
+              ),
             };
           }
-          return post;
+          return p;
         });
       } else if (data._id === postId) {
         return {
@@ -215,63 +181,60 @@ export function usePostActions(postOrPosts) {
     if (!res.ok) throw new Error("Failed to delete comment");
   };
 
+
   // ---------------------------------------------------------------------
   // --------------------------- ADD COMMENT -----------------------------
   // ---------------------------------------------------------------------
 
   const addComment = async (post, postId, tempComment) => {
-  if (!post || !postId) return;
+    if (!post || !postId) return;
 
-  mutatePostCaches(postId, (data) => {
-    if (!data) return data;
-    console.log("Data is:", data)
-    // FEED CACHE (array)
-    if (Array.isArray(data)) {
-      return  data.map((post) => {
-        if (post._id !== postId) return post;
+    mutatePostCaches(postId, (data) => {
+      if (!data) return data;
+      console.log("Data is:", data);
+      // FEED CACHE (array)
+      if (Array.isArray(data)) {
+        return data.map((post) => {
+          if (post._id !== postId) return post;
 
+          return {
+            ...post,
+            comments: [
+              ...(post.comments || []),
+              {
+                ...tempComment,
+              },
+            ],
+          };
+        });
+      }
+
+      // SINGLE POST CACHE
+      if (data._id === postId) {
         return {
-        ...post,
-        comments: [
-          ...(post.comments || []),
-          {
-            ...tempComment,
-            _id: `temp-${Date.now()}`, // temporary id
-            likesCount: 0,
-            createdAt: new Date().toISOString(),
-          },
-        ],
-      };
-      
-      })
-      
-    }
+          ...data,
+          comments: [...(data.comments || []), tempComment],
+        };
+      }
 
-    // SINGLE POST CACHE
-    if (data._id === postId) {
-      return {
-        ...data,
-        comments: [...(data.comments || []), tempComment],
-      };
-    }
-
-    return data;
-  });
-
-  try {
-    const res = await fetch("/api/comments", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(tempComment),
+      return data;
     });
 
-    if (!res.ok) throw new Error("Failed to add comment");
-  } catch (err) {
-    console.error("Failed to add comment:", err);
-  } finally {
-    revalidatePostCaches(postId, post.userId);
-  }
-};
+    try {
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tempComment),
+      });
+
+      if (!res.ok) throw new Error("Failed to add comment");
+    } catch (err) {
+      console.error("Failed to add comment:", err);
+    } finally {
+      revalidatePostCaches(postId, post.userId);
+    }
+  };
+
 
   // ---------------------------------------------------------------------
   // -------------------------- EDIT COMMENT -----------------------------
@@ -281,21 +244,35 @@ export function usePostActions(postOrPosts) {
     const postId = post._id;
 
     // Optimistic UI update
-    mutate(
-      "/api/getposts",
-      optimisticCommentEditUpdate(commentId, newContent),
-      false,
-    );
-    mutate(
-      `/api/getposts/postsByUserId/${post.userId}`,
-      optimisticCommentEditUpdate(commentId, newContent),
-      false,
-    );
-    mutate(
-      `/api/getSinglePost/${postId}`,
-      optimisticCommentEditUpdateSinglePost(commentId, newContent),
-      false,
-    );
+    mutatePostCaches(postId, (data) => {
+      if (!data) return data;       
+      // FEED CACHE (array)
+      if (Array.isArray(data)) {
+        return data.map((post) => {
+          if (post._id !== postId) return post;
+          return {
+            ...post,
+            comments: post.comments.map((comment) => {
+              if (comment._id !== commentId) return comment;
+              return { ...comment, comment: newContent };
+            }),
+          };
+        });
+      }
+
+      // SINGLE POST CACHE
+      if (data._id === postId) {
+        return {
+          ...data,
+          comments: data.comments.map((comment) => {
+            if (comment._id !== commentId) return comment;
+            return { ...comment, comment: newContent };
+          }),
+        };
+      }
+
+      return data;
+    });
 
     try {
       // ✅ Send FormData directly (do NOT set Content-Type manually!)

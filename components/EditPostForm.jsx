@@ -5,11 +5,10 @@ import deleteIcon from "../assets/icons/delete.png";
 import replace from "../assets/icons/replace.png";
 import Image from "next/image";
 import { revalidatePostCaches } from "@/utils/revalidatePost";
-import { mutate } from "swr";
+import { mutatePostCaches } from "@/hooks/usePostActions";
 import Spinner from "./Spinner";
 
 const EditPostForm = ({ setShowEditForm, post }) => {
-
   const [postContent, setPostContent] = useState(post?.postContent);
   const [inputFiles, setInputFiles] = useState({ images: [] });
 
@@ -76,19 +75,15 @@ const EditPostForm = ({ setShowEditForm, post }) => {
         body: formData,
       });
 
-      const data = await res.json();
+      if (!res.ok) throw new Error("Failed to edit post");
 
-      if (res.status === 200) {
-        console.log(data.message);
-        setShowEditForm(false);
-        await revalidatePostCaches(postId, post.userId);
-      }
+      setShowEditForm(false);
+      await revalidatePostCaches(postId, post.userId);
     } catch (error) {
       console.log(error);
-      console.log(data.message);
-    }finally {
-    setLoading(false); // stop spinner
-  }
+    } finally {
+      setLoading(false); // stop spinner
+    }
   };
 
   const deleteSelectedImage = (name) => {
@@ -106,16 +101,21 @@ const EditPostForm = ({ setShowEditForm, post }) => {
 
   const deleteImage = async () => {
     //Optimistic delete image from cached data
-    mutate(
-      "/api/getposts",
-      (posts) => {
-        if (!posts) return posts;
-        return posts.map((post) =>
-          post._id === postId ? { ...post, images: [] } : post,
-        );
-      },
-      false,
-    );
+    mutatePostCaches(postId, (data) => {
+      if (!data) return data;
+
+      // feed cache
+      if (Array.isArray(data)) {
+        return data.map((p) => (p._id === postId ? { ...p, images: [] } : p));
+      }
+
+      // single post cache
+      if (data._id === postId) {
+        return { ...data, images: [] };
+      }
+
+      return data;
+    });
 
     try {
       const res = await fetch(`/api/deleteImage/${post._id}`, {
@@ -264,7 +264,11 @@ const EditPostForm = ({ setShowEditForm, post }) => {
               type="submit"
               className="w-full rounded-lg bg-gradient-to-r from-yellow-950 via-yellow-700 to-yellow-950 py-4 font-semibold text-white"
             >
-              {loading ? <Spinner loading={loading} height={24} width={24}/> : "Update"}
+              {loading ? (
+                <Spinner loading={loading} height={24} width={24} />
+              ) : (
+                "Update"
+              )}
             </button>
           </div>
         </form>

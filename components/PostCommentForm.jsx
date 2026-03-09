@@ -24,12 +24,14 @@ const PostCommentForm = ({postId, parentId = null, setShowForm, post }) => {
   const t = useTranslations("placeholder");
 
   const tempComment = {
+     _id: `temp-${Date.now()}`,
     postId,
     parentId: parentId || null,
     userId: session?.user.id,
     username: session?.user.username,
     comment: text,
     createdAt: new Date().toISOString(),
+
   };
 
   const handleSubmit = async (e) => {

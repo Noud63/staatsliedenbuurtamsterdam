@@ -19,6 +19,7 @@ const EditCommentForm = ({comment, setShowEditComment, post}) => {
     commentContent,
   };
 
+
   useEffect(() => {
     // Focus the textarea when the component mounts
     if (textareaRef.current) {
@@ -29,6 +30,7 @@ const EditCommentForm = ({comment, setShowEditComment, post}) => {
     }
   }, []);
 
+
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
@@ -36,6 +38,7 @@ const EditCommentForm = ({comment, setShowEditComment, post}) => {
       textarea.style.height = `${textarea.scrollHeight}px`; // Set it to the scroll height
     }
   }, [commentContent]); // Depend on comment to update on each change
+
 
   const handleEditPost = async (e) => {
     e.preventDefault();
@@ -50,6 +53,7 @@ const EditCommentForm = ({comment, setShowEditComment, post}) => {
 
     // Optimistic + actual update
     await editComment(comment._id, post, formData, commentContent);
+    console.log("Data:", commentContent)
 
     setShowEditComment(false);
   };

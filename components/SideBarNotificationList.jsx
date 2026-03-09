@@ -117,7 +117,7 @@ const SideBarNotificationList = ({
         className="mx-auto mt-8 w-full rounded-lg border-2 border-white py-2 text-white"
         onClick={deleteAllNotifications}
       >
-        Verwijder reacties
+        Verwijder notificaties
       </button>
 
       {/* <div className="flex w-full justify-center">
