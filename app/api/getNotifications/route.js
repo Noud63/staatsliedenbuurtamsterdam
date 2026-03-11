@@ -21,10 +21,10 @@ export async function GET(req) {
     recipient: session.user.id,
     isRead: false,
   })
-    .lean() // Convert to plain JavaScript objects
     .populate("post")
     .populate("comment")
     .populate("sender", "username name avatar")
+    .lean() // Convert to plain JavaScript objects
     .sort({ createdAt: -1 })
 
     // If more than 9, delete the oldest
@@ -37,9 +37,9 @@ export async function GET(req) {
     }
 
     // Return only the latest 9
-    const latestNine = notifications.slice(0, 9);
+    const latestNine = notifications.length > 9 ? notifications.slice(0, 9) : notifications;
 
-    // console.log("Notifications fetched:", JSON.stringify(notifications, null, 2)  );
+  console.log("Notifications fetched:", JSON.stringify(notifications, null, 2)  );
 
   return new Response(JSON.stringify({ notifications: latestNine }), { status: 200 });
 

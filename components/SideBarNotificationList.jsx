@@ -4,9 +4,19 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { FaThumbsUp } from "react-icons/fa";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import useSWR from "swr";
+import { mutate } from "swr";
 import Image from "next/image";
-import getNotifications from "@/utils/getNotifications";
+// import getNotifications from "@/utils/getNotifications";
 import NotificationListItems from "./NotificationListItems";
+
+const fetcher = async (url) => {
+  const res = await fetch(url, { credentials: 'include' });
+  console.log("Fetcher response status:", res.status);
+  const json = await res.json();
+  console.log("Fetcher json:", json);
+  return json;
+};
 
 const SideBarNotificationList = ({
   setCount,
@@ -16,8 +26,28 @@ const SideBarNotificationList = ({
   count,
 }) => {
   const { data: session } = useSession();
-  const [notifications, setNotifications] = useState([]);
+  console.log("User:", session?.user?.id);
   const sidebarRef = useRef(null);
+
+  const { data, error, mutate } = useSWR(session?.user?.id ? "/api/getNotifications" : null, fetcher);
+
+const notifications = data?.notifications || [];
+
+console.log("Fetched data:", notifications);
+
+useEffect(() => {
+  // Check if data and notifications are not empty, wait for fetch!
+  // Otherwise count is set to 0, no notifications!
+  if (!data) return;
+  if(!notifications) return;
+
+  if (notifications.length > 9) {
+    setCount(9);
+  } else {
+    setCount(notifications.length);
+  }
+}, [data, notifications, setCount]);
+
 
   // Close when clicking outside sidebar
   useEffect(() => {
@@ -39,27 +69,6 @@ const SideBarNotificationList = ({
   }, [showPanel, setShowPanel]);
 
 
-  useEffect(() => {
-    if (!session?.user?.id) return;
-
-    const fetchNotifications = async () => {
-      const res = await getNotifications();
-
-      if (res && Array.isArray(res.notifications)) {
-        if (res.notifications.length > 9) {
-          // Happens already in the backend, but just in case
-          setNotifications(res.notifications.slice(0, 9));
-          setCount(9);
-        } else {
-          setNotifications(res.notifications);
-          setCount(res.notifications.length);
-        }
-      }
-    };
-
-    fetchNotifications();
-  }, [session?.user?.id, setCount]);
-
   const getLikedPost = (postId) => {
     if (!postId) {
       console.warn("No postId found for notification:", note);
@@ -71,21 +80,32 @@ const SideBarNotificationList = ({
 
   const deleteAllNotifications = async () => {
     try {
-      const response = await fetch("/api/deleteAllNotifications", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        setNotifications([]);
-        setCount(0);
-        setShowPanel(false);
-      }
-    } catch (error) {
-      console.error("Error deleting notifications:", error);
-    }
+    // Optimistic update
+    mutate(
+      "/api/getNotifications",
+      (data) => {
+        if (!data) return data;
+        return { ...data, notifications: [] };
+      },
+      false
+    );
+   // Send delete request to server
+    const response = await fetch("/api/deleteAllNotifications", {
+      method: "DELETE",
+    });
+
+    if (!response.ok) throw new Error("Failed to delete notifications");
+
+    // Revalidate to ensure server truth
+    mutate("/api/getNotifications");
+
+    setShowPanel(false);
+
+  } catch (error) {
+    console.error("Error deleting notifications:", error);
+  }
   };
+
 
   return (
     <div

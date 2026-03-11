@@ -1,6 +1,7 @@
 import { mutate } from "swr";
 
 import { revalidatePostCaches } from "@/utils/revalidatePost";
+import { revalidateNotificationsCaches } from "@/utils/revalidatePost";
 
 //Mutate all caches that contain the post (feed, posts by user id, single post) with the same optimistic update function
 export const mutatePostCaches = (postId, updater) => {
@@ -10,7 +11,18 @@ export const mutatePostCaches = (postId, updater) => {
       (key === "/api/getposts" ||
         key.startsWith("/api/getposts/postsByUserId/") ||
         key === `/api/getSinglePost/${postId}`),
+    updater,
+    {
+      revalidate: false,
+      rollbackOnError: true,
+    },
+  );
+};
 
+export const mutateNotificationsCaches = (updater) => {
+  mutate(
+    (key) =>
+      typeof key === "string" && key === "/api/getNotifications",
     updater,
     {
       revalidate: false,
@@ -21,7 +33,7 @@ export const mutatePostCaches = (postId, updater) => {
 
 
 // usePostActions hook to handle all optimistic updates for posts and comments
-export function usePostActions(postOrPosts) {
+export function usePostActions() {
   const getPostId = (post) => post._id;
 
   // ------------------------------------------------------------------------
@@ -81,6 +93,15 @@ export function usePostActions(postOrPosts) {
       }
       return data;
     });
+
+    mutateNotificationsCaches((data) => {
+      if (!data) return data;
+      return {
+        ...data,
+        notifications: data.notifications.filter((notification) => notification.postId?.toString() !== postId)
+      };
+    });
+
     await fetch(`/api/deletepost/${postId}`, {
       method: "DELETE",
     });
