@@ -21,8 +21,7 @@ export const mutatePostCaches = (postId, updater) => {
 
 export const mutateNotificationsCaches = (updater) => {
   mutate(
-    (key) =>
-      typeof key === "string" && key === "/api/getNotifications",
+    (key) => typeof key === "string" && key === "/api/getNotifications",
     updater,
     {
       revalidate: false,
@@ -30,7 +29,6 @@ export const mutateNotificationsCaches = (updater) => {
     },
   );
 };
-
 
 // usePostActions hook to handle all optimistic updates for posts and comments
 export function usePostActions() {
@@ -75,7 +73,6 @@ export function usePostActions() {
     });
   };
 
-
   // ---------------------------------------------------------------------
   // --------------------------- DELETE POST -----------------------------
   // ---------------------------------------------------------------------
@@ -86,7 +83,6 @@ export function usePostActions() {
       if (Array.isArray(data)) {
         return data.filter((p) => p._id !== postId);
       }
-
       // If it's a single post
       if (data?._id === postId) {
         return null; // or you could return a placeholder indicating it's deleted
@@ -95,10 +91,14 @@ export function usePostActions() {
     });
 
     mutateNotificationsCaches((data) => {
+      //data = {"notifications": [{},{},...]} = whole object
+      // Use whole object not only data.notifications to update cache
       if (!data) return data;
       return {
         ...data,
-        notifications: data.notifications.filter((notification) => notification.postId?.toString() !== postId)
+        notifications: data.notifications.filter(
+          (notification) => notification.postId?.toString() !== postId,
+        ),
       };
     });
 
@@ -106,7 +106,6 @@ export function usePostActions() {
       method: "DELETE",
     });
   };
-
 
   // ---------------------------------------------------------------------
   // --------------------------- LIKE COMMENT ----------------------------
@@ -163,7 +162,6 @@ export function usePostActions() {
     if (!res.ok) throw new Error("Failed to like comment");
   };
 
-
   // ---------------------------------------------------------------------
   // --------------------------- DELETE COMMENT --------------------------
   // ---------------------------------------------------------------------
@@ -188,20 +186,30 @@ export function usePostActions() {
       } else if (data._id === postId) {
         return {
           ...data,
-          comments: data.comments.filter((comment) => {
-            return comment._id !== commentId;
-          }),
+          comments: data.comments.filter((comment) => comment._id !== commentId)
         };
       }
       return data;
+    });
+
+    mutateNotificationsCaches((data) => {
+      if (!data) return data;
+      return {
+        ...data,
+        notifications: data.notifications.filter(
+          (note) => note.comment?._id?.toString() !== commentId,
+        ),
+      };
     });
 
     const res = await fetch(`/api/deleteComment/${commentId}`, {
       method: "DELETE",
     });
     if (!res.ok) throw new Error("Failed to delete comment");
+    
+    // Revalidate notifications to catch any nested comment notifications deleted on server
+    await revalidateNotificationsCaches();
   };
-
 
   // ---------------------------------------------------------------------
   // --------------------------- ADD COMMENT -----------------------------
@@ -256,7 +264,6 @@ export function usePostActions() {
     }
   };
 
-
   // ---------------------------------------------------------------------
   // -------------------------- EDIT COMMENT -----------------------------
   // ---------------------------------------------------------------------
@@ -266,7 +273,7 @@ export function usePostActions() {
 
     // Optimistic UI update
     mutatePostCaches(postId, (data) => {
-      if (!data) return data;       
+      if (!data) return data;
       // FEED CACHE (array)
       if (Array.isArray(data)) {
         return data.map((post) => {
@@ -320,3 +327,57 @@ export function usePostActions() {
     editComment,
   };
 }
+
+//Comment
+// {
+//   "_id": {
+//     "$oid": "69b26367c2ebc87703323661"
+//   },
+//   "postId": {
+//     "$oid": "69b18321e9b49f38d3b7e724"
+//   },
+//   "parentId": {
+//     "$oid": "69b183b0e9b49f38d3b7e761"
+//   },
+//   "userId": {
+//     "$oid": "68ff6d981400aeaf74a33c17"
+//   },
+//   "username": "Bob",
+//   "comment": "Tweety bird?",
+//   "likesCount": 1,
+//   "createdAt": {
+//     "$date": "2026-03-12T06:55:35.332Z"
+//   },
+//   "updatedAt": {
+//     "$date": "2026-03-12T06:57:45.008Z"
+//   },
+//   "__v": 0
+// }
+
+//Nortification
+// {
+//   "_id": {
+//     "$oid": "69b26367c2ebc87703323666"
+//   },
+//   "recipient": {
+//     "$oid": "69b1705ae9b49f38d3b7e6e3"
+//   },
+//   "type": "comment",
+//   "post": {
+//     "$oid": "69b18321e9b49f38d3b7e724"
+//   },
+//   "comment": {
+//     "$oid": "69b26367c2ebc87703323661"
+//   },
+//   "sender": {
+//     "$oid": "68ff6d981400aeaf74a33c17"
+//   },
+//   "postId": {
+//     "$oid": "69b18321e9b49f38d3b7e724"
+//   },
+//   "isRead": false,
+//   "createdAt": {
+//     "$date": "2026-03-12T06:55:35.414Z"
+//   },
+//   "__v": 0
+// }

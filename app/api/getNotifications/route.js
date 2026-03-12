@@ -22,7 +22,7 @@ export async function GET(req) {
     isRead: false,
   })
     .populate("post")
-    .populate("comment")
+    .populate("comment") // mongoose checks the comment value wich is the _id of a comment then looks for that comment in the comments collection and adds the fields to the notification.comment
     .populate("sender", "username name avatar")
     .lean() // Convert to plain JavaScript objects
     .sort({ createdAt: -1 })
