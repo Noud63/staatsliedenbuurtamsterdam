@@ -42,8 +42,6 @@ const EditCommentForm = ({comment, setShowEditComment, post}) => {
 
   const handleEditPost = async (e) => {
     e.preventDefault();
-
-  console.log("Data:", commentContent)
   
   if(commentContent === ""){
      await deleteComment(comment._id, post)
@@ -53,7 +51,6 @@ const EditCommentForm = ({comment, setShowEditComment, post}) => {
 
     // Optimistic + actual update
     await editComment(comment._id, post, formData, commentContent);
-    console.log("Data:", commentContent)
 
     setShowEditComment(false);
   };

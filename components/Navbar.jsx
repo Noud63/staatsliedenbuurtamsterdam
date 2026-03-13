@@ -24,7 +24,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="flex w-[350px] flex-row items-center justify-between max-md:justify-end">
+        <div className="flex w-fit flex-row items-center justify-between max-md:justify-end">
           <div className="max-md:hidden">
             <LoginRegisterLogout />
           </div>

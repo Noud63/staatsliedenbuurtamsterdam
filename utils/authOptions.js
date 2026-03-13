@@ -25,7 +25,7 @@ export const authOptions = {
       name: `__Secure-next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: "lax", // "strict" if using OAuth providers
+        sameSite: "strict", // "strict" if using OAuth providers
         path: "/",
         secure: true, //in production >  process.env.NODE_ENV === "production"
       },
@@ -177,3 +177,30 @@ export const authOptions = {
     },
   },
 };
+
+
+
+//--------------- !! In production add these !! ----------------------
+
+// sameSite: "lax", // Prevents CSRF but allows external-site navigation
+
+// SECURITY: Validate required environment variables
+// if (!process.env.NEXTAUTH_SECRET) {
+//   throw new Error("NEXTAUTH_SECRET is not defined in environment variables");
+// }
+
+// SECURITY: Rate limiter (login with credentials) for brute force protection
+
+// SECURITY: Enhanced email validation with RFC 5322 simplified checks regex
+
+// Consideusing external rate limiting service (e.g., Redis) for production scaling
+
+// Add email verification flow for credential-based signups
+
+// Environment variable validation
+// Enhanced email validation (RFC 5322 compliant)
+// Removed allowDangerousEmailAccountLinking
+// Strict CSRF protection (sameSite: "strict")
+// Email verification checks
+// OAuth profile validation
+// Sanitized error logging (dev vs production)

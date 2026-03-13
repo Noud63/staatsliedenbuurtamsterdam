@@ -18,7 +18,7 @@ const LoginRegisterLogout = () => {
     <div className="flex flex-row items-center w-max text-white max-md:mt-4 justify-between max-xsm:h-[50px] max-md:border-b-2 mr-8 max-md:w-full">
       <Hamburger />
 
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-4 items-center">
         {!session ? (
           <Link href="/register" className="">
             {t("registreren")}
@@ -33,7 +33,8 @@ const LoginRegisterLogout = () => {
               {t("inloggen")}
             </Link>
           ) : (
-            <div className="relative">
+            <div className="relative flex flex-1 items-center">
+              {session?.user?.avatar && <div className="mr-2 flex justify-center items-center"><img src={session?.user?.avatar} alt="avatar" className="w-[30px] h-[30px] rounded-full"/></div>}
             <Link href="/profile">
               <span className="flex items-center justify-start">{`Hi, ${session?.user?.username}`}</span>
             </Link>

@@ -1,13 +1,10 @@
 "use client";
 import React, { useRef } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { FaThumbsUp } from "react-icons/fa";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import useSWR from "swr";
-import { mutate } from "swr";
-import Image from "next/image";
-// import getNotifications from "@/utils/getNotifications";
 import NotificationListItems from "./NotificationListItems";
 
 const fetcher = async (url) => {
@@ -26,14 +23,12 @@ const SideBarNotificationList = ({
   count,
 }) => {
   const { data: session } = useSession();
-  console.log("User:", session?.user?.id);
+
   const sidebarRef = useRef(null);
 
   const { data, error, mutate } = useSWR(session?.user?.id ? "/api/getNotifications" : null, fetcher);
 
 const notifications = data?.notifications || [];
-
-console.log("Fetched data:", notifications);
 
 useEffect(() => {
   // Check if data and notifications are not empty, wait for fetch!

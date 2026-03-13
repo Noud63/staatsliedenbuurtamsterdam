@@ -39,7 +39,7 @@ export async function GET(req) {
     // Return only the latest 9
     const latestNine = notifications.length > 9 ? notifications.slice(0, 9) : notifications;
 
-  console.log("Notifications fetched:", JSON.stringify(notifications, null, 2)  );
+  // console.log("Notifications fetched:", JSON.stringify(notifications, null, 2)  );
 
   return new Response(JSON.stringify({ notifications: latestNine }), { status: 200 });
 
