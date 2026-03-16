@@ -5,6 +5,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db";
+import { ipLimiter, accountLimiter } from "@/lib/rateLimit";
+
+import {
+  isAccountLocked,
+  resetLoginAttempts,
+  registerFailedAttempt,
+} from "@/lib/loginLock";
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -62,39 +69,67 @@ export const authOptions = {
       },
 
       async authorize(credentials, req) {
-        try {
-          if (!credentials?.email || !credentials?.password) return null;
 
-          // Basic email validation. For production applications, use email validation libraries like:validator.js
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(credentials.email)) {
-            return null;
+        console.log("AUTHORIZE CALLED");
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("MISSING_CREDENTIALS");
           }
+
+          const email = credentials.email.toLowerCase();
+
+          const ip =
+            req?.headers?.["x-forwarded-for"] ||
+            req?.socket?.remoteAddress ||
+            "unknown";
+
+          const identifier = `${ip}`;
+
+          // Check if account is locked
+          const locked = await isAccountLocked(email);
+          if (locked) {
+            throw new Error("ACCOUNT_LOCKED");
+          }
+
+          // Rate limit
+          const { success: ipSuccess } = await ipLimiter.limit(identifier);
+
+          if (!ipSuccess) {
+            throw new Error("RATE_LIMIT_IP");
+          }
+
+          const { success: accountSuccess } = await accountLimiter.limit(email);
+
+          if (!accountSuccess) {
+            throw new Error("RATE_LIMIT_ACCOUNT");
+          }
+
+          console.log("Rate limit:", { accountSuccess });
 
           await connectDB();
 
-          const dbUser = await User.findOne({
-            email: credentials.email.toLowerCase(),
-          }).select("+password"); // Ensure password is selected if excluded by default
+          const dbUser = await User.findOne({ email }).select("+password");
 
-          if (!dbUser || !dbUser.password) {
-            // return null for security, don't reveal whether user exists
-            return null;
-          }
-
-          const match = await bcrypt.compare(
+          if (!dbUser || !(await bcrypt.compare(
             credentials.password,
-            dbUser.password,
-          );
-          if (!match) {
-            // return null for security
-            return null;
+            dbUser.password)
+          )) {
+            await registerFailedAttempt(email);
+            throw new Error("INVALID_CREDENTIALS");
           }
 
-          // console.log("User:", dbUser);
+          // const match = await bcrypt.compare(
+          //   credentials.password,
+          //   dbUser.password,
+          // );
 
-          //Do not return the whole dbUser object including password!
-          //This is the user object that will be saved in the JWT token
+          // if (!match) {
+          //   await registerFailedAttempt(email); // ← PUT IT HERE
+          //   throw new Error("INVALID_CREDENTIALS");
+          // }
+
+          // Successful login → remove lock
+          await resetLoginAttempts(email);
 
           return {
             id: dbUser._id.toString(),
@@ -104,8 +139,8 @@ export const authOptions = {
             avatar: dbUser.avatar,
           };
         } catch (error) {
-          console.error("Auth error:", error); // Log on server only
-          return null;
+          console.error("Auth error:", error);
+          throw error;
         }
       },
     }),
@@ -128,13 +163,13 @@ export const authOptions = {
           const newUser = await User.create({
             email: profile.email,
             username: profile.given_name,
-            name: profile.name
+            name: profile.name,
           });
           return {
             id: newUser._id.toString(),
             name: newUser.name,
             username: newUser.username,
-            email: newUser.email
+            email: newUser.email,
           };
         } else {
           return {
@@ -177,8 +212,6 @@ export const authOptions = {
     },
   },
 };
-
-
 
 //--------------- !! In production add these !! ----------------------
 

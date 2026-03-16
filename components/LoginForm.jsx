@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SendHorizontal } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { CircleX } from "lucide-react";
@@ -15,13 +15,32 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [message, setMessage] = useState("");
+  const [countDown, setCountDown] = useState(60);
 
   const router = useRouter();
 
+  useEffect(() => {
+    if (countDown <= 0) return;
+
+    const timer = setInterval(() => {
+      setCountDown((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [countDown]);
+
+  useEffect(() => {
+    if (countDown === 0) {
+      setDisabled(false);
+      setMessage("");
+    }
+  }, [countDown]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+            if (disabled) return;
     try {
       const res = await signIn("credentials", {
         email,
@@ -29,24 +48,42 @@ const LoginForm = () => {
         redirect: false,
       });
 
-     if (res?.ok) {
-      setSuccess(true);
-      setTimeout(() => {
-        router.push("/");
-      }, 1500);
-    }
+      if (res?.ok) {
+        setSuccess(true);
+        setTimeout(() => {
+          router.push("/");
+        }, 1500);
+      }
 
       if (res?.error) {
+        if (res.error === "RATE_LIMIT") {
+          setDisabled(true);
+          setCountDown(60);
+          setMessage("Te veel pogingen.");
+        } else if (res.error === "ACCOUNT_LOCKED") {
+          setDisabled(true);
+          setCountDown(60);
+          setMessage("Account tijdelijk geblokkeerd.");
+        }
+
         setError(true);
         setTimeout(() => {
           setError(false);
-        }, 2000);
+        }, 1500);
       }
     } catch (error) {
       console.log(error, { message: error.message });
     } finally {
       setEmail("");
       setPassword("");
+    }
+  };
+
+  const closeWarning = () => {
+    if (message) {
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
     }
   };
 
@@ -90,9 +127,7 @@ const LoginForm = () => {
           {error && (
             <div className="flex w-full flex-row items-center rounded-md bg-red-100 px-4 py-3">
               <CircleX size={20} color="darkred" className="mr-2" />
-              <span className="text-red-800">
-                Ongeldige inloggegevens!
-              </span>
+              <span className="text-red-800">Ongeldige inloggegevens!</span>
             </div>
           )}
 
@@ -103,9 +138,21 @@ const LoginForm = () => {
             </div>
           )}
 
+          {message && (
+            <div className="flex w-full flex-row items-center rounded-md bg-red-100 px-4 py-3">
+              {/* <CircleX size={20} color="darkred" className="mr-2" /> */}
+              <span className="text-red-800">{message} Wacht {countDown} sec en probeer opnieuw.</span>
+            </div>
+          )}
+
           <div className="mb-4 mt-4">
             <button
-              className="text-md flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-red-950 via-yellow-700 to-red-950 py-4 text-white"
+              disabled={disabled}
+              className={`text-md flex w-full items-center justify-center rounded-lg py-4 text-white ${
+                disabled
+                  ? "cursor-not-allowed bg-gray-400"
+                  : "bg-gradient-to-r from-red-950 via-yellow-700 to-red-950"
+              }`}
               type="submit"
             >
               <SendHorizontal className="mr-2" /> Log in
@@ -113,19 +160,19 @@ const LoginForm = () => {
           </div>
 
           <button
-    type="button"
-    onClick={() => signIn("google", { callbackUrl: "/" })}
-    className="mt-4 flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-white py-3 text-black  hover:border-yellow-700 transition duration-500"
-  >
-    <Image
-      src="/icons/google_icon.png"
-      alt="Google logo"
-      width={20}
-      height={20}
-      className="mr-2 h-5 w-5"
-    />
-    Log in met Google
-  </button>
+            type="button"
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+            className="mt-4 flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-white py-3 text-black transition duration-500 hover:border-yellow-700"
+          >
+            <Image
+              src="/icons/google_icon.png"
+              alt="Google logo"
+              width={20}
+              height={20}
+              className="mr-2 h-5 w-5"
+            />
+            Log in met Google
+          </button>
 
           <div className="mt-4 flex w-full items-center gap-1 font-medium">
             Nog geen account? <ArrowRight size={16} />
@@ -135,6 +182,6 @@ const LoginForm = () => {
       </div>
     </div>
   );
-}
+};
 
-export default LoginForm
+export default LoginForm;
