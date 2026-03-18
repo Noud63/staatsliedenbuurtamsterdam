@@ -53,7 +53,7 @@ const LoginForm = () => {
         setSuccess(true);
         setTimeout(() => {
           router.push("/");
-        }, 1500);
+        }, 1000);
       }
 
       if (res?.error) {

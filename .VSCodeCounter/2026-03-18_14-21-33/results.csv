@@ -1,0 +1,192 @@
+"filename", "language", "JSON with Comments", "JavaScript", "JSON", "JavaScript JSX", "PostCSS", "TypeScript", "Markdown", "comment", "blank", "total"
+"g:\sl_refactor\.eslintrc.json", "JSON with Comments", 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"g:\sl_refactor\.prettierrc", "JSON", 0, 0, 4, 0, 0, 0, 0, 0, 1, 5
+"g:\sl_refactor\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 7, 0, 8, 15
+"g:\sl_refactor\app\[locale]\layout.jsx", "JavaScript JSX", 0, 0, 0, 40, 0, 0, 0, 4, 8, 52
+"g:\sl_refactor\app\[locale]\leesditeerst\page.jsx", "JavaScript JSX", 0, 0, 0, 7, 0, 0, 0, 0, 3, 10
+"g:\sl_refactor\app\[locale]\login\page.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 2, 10
+"g:\sl_refactor\app\[locale]\menu\beeld\page.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 4, 13
+"g:\sl_refactor\app\[locale]\menu\buurt\buurtteam\page.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 3, 12
+"g:\sl_refactor\app\[locale]\menu\buurt\layout.jsx", "JavaScript JSX", 0, 0, 0, 10, 0, 0, 0, 0, 1, 11
+"g:\sl_refactor\app\[locale]\menu\contact\page.jsx", "JavaScript JSX", 0, 0, 0, 20, 0, 0, 0, 0, 6, 26
+"g:\sl_refactor\app\[locale]\menu\demografie\page.jsx", "JavaScript JSX", 0, 0, 0, 10, 0, 0, 0, 0, 4, 14
+"g:\sl_refactor\app\[locale]\menu\historie\page.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 4, 13
+"g:\sl_refactor\app\[locale]\menu\kunst\page.jsx", "JavaScript JSX", 0, 0, 0, 12, 0, 0, 0, 0, 3, 15
+"g:\sl_refactor\app\[locale]\menu\nieuws\page.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 4, 12
+"g:\sl_refactor\app\[locale]\menu\praktisch\afvalcontainers\page.jsx", "JavaScript JSX", 0, 0, 0, 23, 0, 0, 0, 0, 4, 27
+"g:\sl_refactor\app\[locale]\menu\praktisch\dienstverlening\page.jsx", "JavaScript JSX", 0, 0, 0, 10, 0, 0, 0, 0, 3, 13
+"g:\sl_refactor\app\[locale]\menu\praktisch\grofvuil\page.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 3, 11
+"g:\sl_refactor\app\[locale]\menu\praktisch\horeca\page.jsx", "JavaScript JSX", 0, 0, 0, 18, 0, 0, 0, 0, 5, 23
+"g:\sl_refactor\app\[locale]\menu\praktisch\layout.jsx", "JavaScript JSX", 0, 0, 0, 12, 0, 0, 0, 0, 4, 16
+"g:\sl_refactor\app\[locale]\menu\praktisch\ov\page.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 4, 13
+"g:\sl_refactor\app\[locale]\menu\praktisch\winkels\page.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 3, 18
+"g:\sl_refactor\app\[locale]\menu\praktisch\zorg\page.jsx", "JavaScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 8, 25
+"g:\sl_refactor\app\[locale]\menu\staatslieden\page.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 3, 4, 15
+"g:\sl_refactor\app\[locale]\menu\westergas\page.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 3, 11
+"g:\sl_refactor\app\[locale]\not-found.jsx", "JavaScript JSX", 0, 0, 0, 28, 0, 0, 0, 0, 3, 31
+"g:\sl_refactor\app\[locale]\page.js", "JavaScript", 0, 15, 0, 0, 0, 0, 0, 0, 5, 20
+"g:\sl_refactor\app\[locale]\postsByUserId\[postId]\layout.jsx", "JavaScript JSX", 0, 0, 0, 7, 0, 0, 0, 0, 2, 9
+"g:\sl_refactor\app\[locale]\postsByUserId\[postId]\page.jsx", "JavaScript JSX", 0, 0, 0, 27, 0, 0, 0, 1, 9, 37
+"g:\sl_refactor\app\[locale]\profile\page.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 3, 11
+"g:\sl_refactor\app\[locale]\register\page.jsx", "JavaScript JSX", 0, 0, 0, 6, 0, 0, 0, 0, 3, 9
+"g:\sl_refactor\app\[locale]\sharedpost\[postId]\page.jsx", "JavaScript JSX", 0, 0, 0, 16, 0, 0, 0, 1, 10, 27
+"g:\sl_refactor\app\[locale]\weatherreport\page.jsx", "JavaScript JSX", 0, 0, 0, 7, 0, 0, 0, 0, 3, 10
+"g:\sl_refactor\app\api\auth\[...nextauth]\route.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 0, 5, 12
+"g:\sl_refactor\app\api\auth\login\route.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"g:\sl_refactor\app\api\comments\[commentId]\like\route.js", "JavaScript", 0, 62, 0, 0, 0, 0, 0, 9, 19, 90
+"g:\sl_refactor\app\api\comments\route.js", "JavaScript", 0, 71, 0, 0, 0, 0, 0, 2, 17, 90
+"g:\sl_refactor\app\api\deleteAllNotifications\route.js", "JavaScript", 0, 27, 0, 0, 0, 0, 0, 0, 3, 30
+"g:\sl_refactor\app\api\deleteComment\[commentId]\route.js", "JavaScript", 0, 60, 0, 0, 0, 0, 0, 5, 14, 79
+"g:\sl_refactor\app\api\deleteImage\[postId]\route.js", "JavaScript", 0, 31, 0, 0, 0, 0, 0, 0, 11, 42
+"g:\sl_refactor\app\api\deletepost\[postId]\route.js", "JavaScript", 0, 68, 0, 0, 0, 0, 0, 6, 12, 86
+"g:\sl_refactor\app\api\editComment\[commentId]\route.js", "JavaScript", 0, 38, 0, 0, 0, 0, 0, 1, 14, 53
+"g:\sl_refactor\app\api\editpost\[postId]\route.js", "JavaScript", 0, 57, 0, 0, 0, 0, 0, 4, 17, 78
+"g:\sl_refactor\app\api\editprofile\route.js", "JavaScript", 0, 73, 0, 0, 0, 0, 0, 3, 23, 99
+"g:\sl_refactor\app\api\getNotifications\route.js", "JavaScript", 0, 36, 0, 0, 0, 0, 0, 4, 12, 52
+"g:\sl_refactor\app\api\getSinglePost\[postId]\route.js", "JavaScript", 0, 40, 0, 0, 0, 0, 0, 3, 13, 56
+"g:\sl_refactor\app\api\getposts\[[...slug]]\route.js", "JavaScript", 0, 42, 0, 0, 0, 0, 0, 4, 13, 59
+"g:\sl_refactor\app\api\getuserinfo\[id]\route.js", "JavaScript", 0, 23, 0, 0, 0, 0, 0, 0, 5, 28
+"g:\sl_refactor\app\api\lock-ttl\route.js", "JavaScript", 0, 11, 0, 0, 0, 0, 0, 0, 4, 15
+"g:\sl_refactor\app\api\posts\[postId]\like\route.js", "JavaScript", 0, 53, 0, 0, 0, 0, 0, 2, 13, 68
+"g:\sl_refactor\app\api\posts\route.js", "JavaScript", 0, 142, 0, 0, 0, 0, 0, 18, 34, 194
+"g:\sl_refactor\app\api\register\route.js", "JavaScript", 0, 50, 0, 0, 0, 0, 0, 2, 11, 63
+"g:\sl_refactor\app\globals.css", "PostCSS", 0, 0, 0, 0, 132, 0, 0, 5, 26, 163
+"g:\sl_refactor\components.json", "JSON", 0, 0, 22, 0, 0, 0, 0, 0, 0, 22
+"g:\sl_refactor\components\AddPost.jsx", "JavaScript JSX", 0, 0, 0, 53, 0, 0, 0, 2, 10, 65
+"g:\sl_refactor\components\AddPostModal.jsx", "JavaScript JSX", 0, 0, 0, 141, 0, 0, 0, 3, 25, 169
+"g:\sl_refactor\components\AuthProvider.jsx", "JavaScript JSX", 0, 0, 0, 6, 0, 0, 0, 0, 3, 9
+"g:\sl_refactor\components\ClientSpinner.jsx", "JavaScript JSX", 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"g:\sl_refactor\components\CloseSinglePostButton.jsx", "JavaScript JSX", 0, 0, 0, 16, 0, 0, 0, 0, 4, 20
+"g:\sl_refactor\components\Comment.jsx", "JavaScript JSX", 0, 0, 0, 130, 0, 0, 0, 1, 17, 148
+"g:\sl_refactor\components\CommentOptions.jsx", "JavaScript JSX", 0, 0, 0, 70, 0, 0, 0, 0, 8, 78
+"g:\sl_refactor\components\EditCommentForm.jsx", "JavaScript JSX", 0, 0, 0, 76, 0, 0, 0, 3, 19, 98
+"g:\sl_refactor\components\EditPostForm.jsx", "JavaScript JSX", 0, 0, 0, 236, 0, 0, 0, 9, 36, 281
+"g:\sl_refactor\components\Editordelete.jsx", "JavaScript JSX", 0, 0, 0, 62, 0, 0, 0, 0, 9, 71
+"g:\sl_refactor\components\Footer.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 5, 13
+"g:\sl_refactor\components\GetAllPosts.jsx", "JavaScript JSX", 0, 0, 0, 45, 0, 0, 0, 1, 11, 57
+"g:\sl_refactor\components\Hamburger.jsx", "JavaScript JSX", 0, 0, 0, 18, 0, 0, 0, 0, 6, 24
+"g:\sl_refactor\components\LanguageSwitcher.jsx", "JavaScript JSX", 0, 0, 0, 24, 0, 0, 0, 13, 9, 46
+"g:\sl_refactor\components\LeesDit.jsx", "JavaScript JSX", 0, 0, 0, 34, 0, 0, 0, 0, 6, 40
+"g:\sl_refactor\components\LeesDitEerst.jsx", "JavaScript JSX", 0, 0, 0, 50, 0, 0, 0, 0, 7, 57
+"g:\sl_refactor\components\LikeAndShareButtons.jsx", "JavaScript JSX", 0, 0, 0, 53, 0, 0, 0, 1, 11, 65
+"g:\sl_refactor\components\LikeButton.jsx", "JavaScript JSX", 0, 0, 0, 25, 0, 0, 0, 1, 5, 31
+"g:\sl_refactor\components\LikeandShareBar.jsx", "JavaScript JSX", 0, 0, 0, 10, 0, 0, 0, 0, 3, 13
+"g:\sl_refactor\components\LoginForm.jsx", "JavaScript JSX", 0, 0, 0, 165, 0, 0, 0, 2, 20, 187
+"g:\sl_refactor\components\LoginRegisterLogout.jsx", "JavaScript JSX", 0, 0, 0, 56, 0, 0, 0, 0, 11, 67
+"g:\sl_refactor\components\Menu.jsx", "JavaScript JSX", 0, 0, 0, 38, 0, 0, 0, 2, 7, 47
+"g:\sl_refactor\components\MenuOverlay.jsx", "JavaScript JSX", 0, 0, 0, 48, 0, 0, 0, 0, 6, 54
+"g:\sl_refactor\components\Navbar.jsx", "JavaScript JSX", 0, 0, 0, 37, 0, 0, 0, 0, 7, 44
+"g:\sl_refactor\components\NavbarNotificationBadge.jsx", "JavaScript JSX", 0, 0, 0, 47, 0, 0, 0, 0, 9, 56
+"g:\sl_refactor\components\NotificationListItems.jsx", "JavaScript JSX", 0, 0, 0, 78, 0, 0, 0, 0, 6, 84
+"g:\sl_refactor\components\PostComment.jsx", "JavaScript JSX", 0, 0, 0, 58, 0, 0, 0, 4, 9, 71
+"g:\sl_refactor\components\PostCommentForm.jsx", "JavaScript JSX", 0, 0, 0, 85, 0, 0, 0, 0, 19, 104
+"g:\sl_refactor\components\PostUserName.jsx", "JavaScript JSX", 0, 0, 0, 19, 0, 0, 0, 0, 5, 24
+"g:\sl_refactor\components\ProfileForm.jsx", "JavaScript JSX", 0, 0, 0, 150, 0, 0, 0, 2, 25, 177
+"g:\sl_refactor\components\RegisterForm.jsx", "JavaScript JSX", 0, 0, 0, 161, 0, 0, 0, 0, 17, 178
+"g:\sl_refactor\components\SharedPost.jsx", "JavaScript JSX", 0, 0, 0, 60, 0, 0, 0, 0, 11, 71
+"g:\sl_refactor\components\SideBarNotificationList.jsx", "JavaScript JSX", 0, 0, 0, 114, 0, 0, 0, 56, 24, 194
+"g:\sl_refactor\components\SingleNotificationPost.jsx", "JavaScript JSX", 0, 0, 0, 23, 0, 0, 0, 0, 4, 27
+"g:\sl_refactor\components\SinglePost.jsx", "JavaScript JSX", 0, 0, 0, 120, 0, 0, 0, 2, 22, 144
+"g:\sl_refactor\components\Spinner.jsx", "JavaScript JSX", 0, 0, 0, 20, 0, 0, 0, 4, 6, 30
+"g:\sl_refactor\components\TitleBar.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 3, 12
+"g:\sl_refactor\components\ToggleButton.jsx", "JavaScript JSX", 0, 0, 0, 23, 0, 0, 0, 1, 6, 30
+"g:\sl_refactor\components\TranslateButton.jsx", "JavaScript JSX", 0, 0, 0, 16, 0, 0, 0, 0, 4, 20
+"g:\sl_refactor\components\Weather.jsx", "JavaScript JSX", 0, 0, 0, 63, 0, 0, 0, 3, 13, 79
+"g:\sl_refactor\components\Weatherreport.jsx", "JavaScript JSX", 0, 0, 0, 40, 0, 0, 0, 0, 5, 45
+"g:\sl_refactor\components\WeerMorgen.jsx", "JavaScript JSX", 0, 0, 0, 127, 0, 0, 0, 1, 18, 146
+"g:\sl_refactor\components\WeerVandaag.jsx", "JavaScript JSX", 0, 0, 0, 128, 0, 0, 0, 0, 16, 144
+"g:\sl_refactor\components\hoofdmenu\beeld\Beeld.jsx", "JavaScript JSX", 0, 0, 0, 72, 0, 0, 0, 6, 9, 87
+"g:\sl_refactor\components\hoofdmenu\buurt\Administratie.jsx", "JavaScript JSX", 0, 0, 0, 56, 0, 0, 0, 0, 2, 58
+"g:\sl_refactor\components\hoofdmenu\buurt\Buurtteam.jsx", "JavaScript JSX", 0, 0, 0, 121, 0, 0, 0, 1, 21, 143
+"g:\sl_refactor\components\hoofdmenu\buurt\Financien.jsx", "JavaScript JSX", 0, 0, 0, 62, 0, 0, 0, 0, 3, 65
+"g:\sl_refactor\components\hoofdmenu\buurt\Gezondheid.jsx", "JavaScript JSX", 0, 0, 0, 85, 0, 0, 0, 0, 3, 88
+"g:\sl_refactor\components\hoofdmenu\buurt\Huisvesting.jsx", "JavaScript JSX", 0, 0, 0, 51, 0, 0, 0, 0, 2, 53
+"g:\sl_refactor\components\hoofdmenu\buurt\Ontmoeten.jsx", "JavaScript JSX", 0, 0, 0, 105, 0, 0, 0, 0, 9, 114
+"g:\sl_refactor\components\hoofdmenu\buurt\Veiligheid.jsx", "JavaScript JSX", 0, 0, 0, 50, 0, 0, 0, 0, 5, 55
+"g:\sl_refactor\components\hoofdmenu\buurt\Werk.jsx", "JavaScript JSX", 0, 0, 0, 41, 0, 0, 0, 0, 2, 43
+"g:\sl_refactor\components\hoofdmenu\buurt\Zorg.jsx", "JavaScript JSX", 0, 0, 0, 44, 0, 0, 0, 0, 4, 48
+"g:\sl_refactor\components\hoofdmenu\historie\Historie.jsx", "JavaScript JSX", 0, 0, 0, 143, 0, 0, 0, 1, 21, 165
+"g:\sl_refactor\components\hoofdmenu\infographics\EenpersoonshuishoudensChart.jsx", "JavaScript JSX", 0, 0, 0, 99, 0, 0, 0, 0, 9, 108
+"g:\sl_refactor\components\hoofdmenu\infographics\GemiddeldeHuurPrijsChart.jsx", "JavaScript JSX", 0, 0, 0, 94, 0, 0, 0, 0, 9, 103
+"g:\sl_refactor\components\hoofdmenu\infographics\InkomensChart.jsx", "JavaScript JSX", 0, 0, 0, 98, 0, 0, 0, 0, 9, 107
+"g:\sl_refactor\components\hoofdmenu\infographics\InwonersChart.jsx", "JavaScript JSX", 0, 0, 0, 76, 0, 0, 0, 0, 10, 86
+"g:\sl_refactor\components\hoofdmenu\infographics\LeeftijdscategorieenChart.jsx", "JavaScript JSX", 0, 0, 0, 122, 0, 0, 0, 0, 9, 131
+"g:\sl_refactor\components\hoofdmenu\infographics\WoonoppervlakChart.jsx", "JavaScript JSX", 0, 0, 0, 122, 0, 0, 0, 0, 7, 129
+"g:\sl_refactor\components\hoofdmenu\infographics\charts\AllCharts.jsx", "JavaScript JSX", 0, 0, 0, 107, 0, 0, 0, 0, 11, 118
+"g:\sl_refactor\components\hoofdmenu\kunst\KunstEnCultuur.jsx", "JavaScript JSX", 0, 0, 0, 8, 0, 0, 0, 0, 2, 10
+"g:\sl_refactor\components\hoofdmenu\praktisch\IconsMenu.jsx", "JavaScript JSX", 0, 0, 0, 128, 0, 0, 0, 0, 9, 137
+"g:\sl_refactor\components\hoofdmenu\praktisch\grofvuil\Grofvuil.jsx", "JavaScript JSX", 0, 0, 0, 102, 0, 0, 0, 0, 12, 114
+"g:\sl_refactor\components\hoofdmenu\praktisch\grofvuil\WatWeOphalen.jsx", "JavaScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 6, 41
+"g:\sl_refactor\components\hoofdmenu\praktisch\horeca\Horeca.jsx", "JavaScript JSX", 0, 0, 0, 58, 0, 0, 0, 0, 6, 64
+"g:\sl_refactor\components\hoofdmenu\praktisch\ov\AlleHaltesTram5.jsx", "JavaScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 5, 40
+"g:\sl_refactor\components\hoofdmenu\praktisch\ov\AllehaltesBus21.jsx", "JavaScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 4, 39
+"g:\sl_refactor\components\hoofdmenu\praktisch\ov\Buslijn21.jsx", "JavaScript JSX", 0, 0, 0, 53, 0, 0, 0, 0, 6, 59
+"g:\sl_refactor\components\hoofdmenu\praktisch\ov\Ov.jsx", "JavaScript JSX", 0, 0, 0, 66, 0, 0, 0, 0, 15, 81
+"g:\sl_refactor\components\hoofdmenu\praktisch\ov\Tramlijn5.jsx", "JavaScript JSX", 0, 0, 0, 51, 0, 0, 0, 0, 7, 58
+"g:\sl_refactor\components\hoofdmenu\praktisch\winkels\Winkelbestand.jsx", "JavaScript JSX", 0, 0, 0, 50, 0, 0, 0, 0, 7, 57
+"g:\sl_refactor\components\hoofdmenu\praktisch\zorg\AlleZorgInstanties.jsx", "JavaScript JSX", 0, 0, 0, 44, 0, 0, 0, 0, 8, 52
+"g:\sl_refactor\components\hoofdmenu\staatslieden\Description.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 4, 19
+"g:\sl_refactor\components\hoofdmenu\staatslieden\Staatslieden.jsx", "JavaScript JSX", 0, 0, 0, 60, 0, 0, 0, 3, 12, 75
+"g:\sl_refactor\components\hoofdmenu\westergas\WesterGas.jsx", "JavaScript JSX", 0, 0, 0, 11, 0, 0, 0, 0, 2, 13
+"g:\sl_refactor\components\praktisch\AlleHaltesTram19.jsx", "JavaScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 5, 40
+"g:\sl_refactor\components\praktisch\AllehaltesBus21.jsx", "JavaScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 4, 39
+"g:\sl_refactor\components\praktisch\Buslijn21.jsx", "JavaScript JSX", 0, 0, 0, 53, 0, 0, 0, 0, 6, 59
+"g:\sl_refactor\components\praktisch\Grofvuil.jsx", "JavaScript JSX", 0, 0, 0, 103, 0, 0, 0, 0, 9, 112
+"g:\sl_refactor\components\praktisch\Horeca.jsx", "JavaScript JSX", 0, 0, 0, 49, 0, 0, 0, 0, 5, 54
+"g:\sl_refactor\components\praktisch\IconsMenu.jsx", "JavaScript JSX", 0, 0, 0, 128, 0, 0, 0, 0, 9, 137
+"g:\sl_refactor\components\praktisch\Tramlijn19.jsx", "JavaScript JSX", 0, 0, 0, 51, 0, 0, 0, 0, 7, 58
+"g:\sl_refactor\components\praktisch\WatWeOphalen.jsx", "JavaScript JSX", 0, 0, 0, 35, 0, 0, 0, 0, 6, 41
+"g:\sl_refactor\components\praktisch\Winkelbestand.jsx", "JavaScript JSX", 0, 0, 0, 49, 0, 0, 0, 0, 5, 54
+"g:\sl_refactor\components\praktisch\zorg\AlleZorgInstanties.jsx", "JavaScript JSX", 0, 0, 0, 44, 0, 0, 0, 0, 8, 52
+"g:\sl_refactor\components\ui\card.jsx", "JavaScript JSX", 0, 0, 0, 45, 0, 0, 0, 0, 9, 54
+"g:\sl_refactor\components\ui\chart.jsx", "JavaScript JSX", 0, 0, 0, 279, 0, 0, 0, 2, 30, 311
+"g:\sl_refactor\config\cloudinary.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 0, 3, 10
+"g:\sl_refactor\connectDB\database.js", "JavaScript", 0, 28, 0, 0, 0, 0, 0, 5, 10, 43
+"g:\sl_refactor\context\LanguageContext.js", "JavaScript", 0, 15, 0, 0, 0, 0, 0, 0, 6, 21
+"g:\sl_refactor\data\adressen.json", "JSON", 0, 0, 285, 0, 0, 0, 0, 0, 1, 286
+"g:\sl_refactor\data\beeldToenEnNu.json", "JSON", 0, 0, 322, 0, 0, 0, 0, 0, 1, 323
+"g:\sl_refactor\data\grofvuil.json", "JSON", 0, 0, 28, 0, 0, 0, 0, 0, 0, 28
+"g:\sl_refactor\data\haltesbuslijn21.json", "JSON", 0, 0, 34, 0, 0, 0, 0, 0, 2, 36
+"g:\sl_refactor\data\haltestramlijn5.json", "JSON", 0, 0, 33, 0, 0, 0, 0, 0, 1, 34
+"g:\sl_refactor\data\horeca.json", "JSON", 0, 0, 314, 0, 0, 0, 0, 0, 1, 315
+"g:\sl_refactor\data\menuItems.json", "JSON", 0, 0, 26, 0, 0, 0, 0, 0, 1, 27
+"g:\sl_refactor\data\straatnamen.json", "JSON", 0, 0, 211, 0, 0, 0, 0, 0, 2, 213
+"g:\sl_refactor\data\winkelbestand.json", "JSON", 0, 0, 270, 0, 0, 0, 0, 0, 1, 271
+"g:\sl_refactor\helper\convertSunsetAndSunrise.js", "JavaScript", 0, 14, 0, 0, 0, 0, 0, 1, 5, 20
+"g:\sl_refactor\helper\convertTime.js", "JavaScript", 0, 11, 0, 0, 0, 0, 0, 0, 4, 15
+"g:\sl_refactor\helper\getSunriseAndSunset.js", "JavaScript", 0, 14, 0, 0, 0, 0, 0, 2, 4, 20
+"g:\sl_refactor\helper\getWeatherData.js", "JavaScript", 0, 49, 0, 0, 0, 0, 0, 2, 9, 60
+"g:\sl_refactor\hooks\usePostActions.js", "JavaScript", 0, 250, 0, 0, 0, 0, 0, 38, 43, 331
+"g:\sl_refactor\i18n\navigation.js", "JavaScript", 0, 4, 0, 0, 0, 0, 0, 2, 2, 8
+"g:\sl_refactor\i18n\request.js", "JavaScript", 0, 13, 0, 0, 0, 0, 0, 2, 4, 19
+"g:\sl_refactor\i18n\routing.js", "JavaScript", 0, 5, 0, 0, 0, 0, 0, 2, 3, 10
+"g:\sl_refactor\jsconfig.json", "JSON with Comments", 7, 0, 0, 0, 0, 0, 0, 0, 1, 8
+"g:\sl_refactor\lib\db.ts", "TypeScript", 0, 0, 0, 0, 0, 28, 0, 6, 6, 40
+"g:\sl_refactor\lib\loginLock.js", "JavaScript", 0, 13, 0, 0, 0, 0, 0, 0, 4, 17
+"g:\sl_refactor\lib\rateLimit.js", "JavaScript", 0, 16, 0, 0, 0, 0, 0, 0, 3, 19
+"g:\sl_refactor\lib\utils.js", "JavaScript", 0, 5, 0, 0, 0, 0, 0, 0, 2, 7
+"g:\sl_refactor\messages\en.json", "JSON", 0, 0, 145, 0, 0, 0, 0, 0, 1, 146
+"g:\sl_refactor\messages\nl.json", "JSON", 0, 0, 146, 0, 0, 0, 0, 0, 2, 148
+"g:\sl_refactor\middleware.js", "JavaScript", 0, 6, 0, 0, 0, 0, 0, 3, 3, 12
+"g:\sl_refactor\models\User.js", "JavaScript", 0, 38, 0, 0, 0, 0, 0, 2, 6, 46
+"g:\sl_refactor\models\avatar.js", "JavaScript", 0, 26, 0, 0, 0, 0, 0, 0, 5, 31
+"g:\sl_refactor\models\comment.js", "JavaScript", 0, 31, 0, 0, 0, 0, 0, 0, 6, 37
+"g:\sl_refactor\models\commentLikes.js", "JavaScript", 0, 13, 0, 0, 0, 0, 0, 0, 3, 16
+"g:\sl_refactor\models\notification.js", "JavaScript", 0, 14, 0, 0, 0, 0, 0, 0, 3, 17
+"g:\sl_refactor\models\post.js", "JavaScript", 0, 33, 0, 0, 0, 0, 0, 0, 5, 38
+"g:\sl_refactor\models\postLikes.js", "JavaScript", 0, 12, 0, 0, 0, 0, 0, 0, 3, 15
+"g:\sl_refactor\next.config.mjs", "JavaScript", 0, 51, 0, 0, 0, 0, 0, 1, 5, 57
+"g:\sl_refactor\package-lock.json", "JSON", 0, 0, 10662, 0, 0, 0, 0, 0, 1, 10663
+"g:\sl_refactor\package.json", "JSON", 0, 0, 62, 0, 0, 0, 0, 0, 1, 63
+"g:\sl_refactor\postcss.config.mjs", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 1, 1, 9
+"g:\sl_refactor\tailwind.config.js", "JavaScript", 0, 110, 0, 0, 0, 0, 0, 1, 1, 112
+"g:\sl_refactor\utils\authOptions.js", "JavaScript", 0, 156, 0, 0, 0, 0, 0, 32, 36, 224
+"g:\sl_refactor\utils\deleteComment.js", "JavaScript", 0, 19, 0, 0, 0, 0, 0, 0, 5, 24
+"g:\sl_refactor\utils\deleteImageFromCloudinary.js", "JavaScript", 0, 9, 0, 0, 0, 0, 0, 0, 2, 11
+"g:\sl_refactor\utils\getNotifications.js", "JavaScript", 0, 20, 0, 0, 0, 0, 0, 0, 6, 26
+"g:\sl_refactor\utils\getPostWithComments.js", "JavaScript", 0, 70, 0, 0, 0, 0, 0, 1, 5, 76
+"g:\sl_refactor\utils\getSessionUser.js", "JavaScript", 0, 17, 0, 0, 0, 0, 0, 0, 3, 20
+"g:\sl_refactor\utils\optimisticUpdate.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 164, 24, 188
+"g:\sl_refactor\utils\postsRequest.js", "JavaScript", 0, 20, 0, 0, 0, 0, 0, 56, 20, 96
+"g:\sl_refactor\utils\revalidatePost.js", "JavaScript", 0, 12, 0, 0, 0, 0, 0, 0, 4, 16
+"Total", "-", 10, 2014, 12564, 6320, 132, 28, 7, 522, 1489, 23086

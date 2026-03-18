@@ -1,0 +1,322 @@
+Date : 2026-03-18 14:21:33
+Directory : g:\sl_refactor
+Total : 190 files,  21075 codes, 522 comments, 1489 blanks, all 23086 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |         15 |     12,564 |          0 |         16 |     12,580 |
+| JavaScript JSX     |        116 |      6,320 |        133 |        937 |      7,390 |
+| JavaScript         |         54 |      2,014 |        378 |        494 |      2,886 |
+| PostCSS            |          1 |        132 |          5 |         26 |        163 |
+| TypeScript         |          1 |         28 |          6 |          6 |         40 |
+| JSON with Comments |          2 |         10 |          0 |          2 |         12 |
+| Markdown           |          1 |          7 |          0 |          8 |         15 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                |        190 |     21,075 |        522 |      1,489 |     23,086 |
+| . (Files)                                                                        |         11 |     10,941 |          6 |         23 |     10,970 |
+| app                                                                              |         49 |      1,407 |         77 |        388 |      1,872 |
+| app (Files)                                                                      |          1 |        132 |          5 |         26 |        163 |
+| app\[locale]                                                                     |         29 |        384 |          9 |        121 |        514 |
+| app\[locale] (Files)                                                             |          3 |         83 |          4 |         16 |        103 |
+| app\[locale]\leesditeerst                                                        |          1 |          7 |          0 |          3 |         10 |
+| app\[locale]\login                                                               |          1 |          8 |          0 |          2 |         10 |
+| app\[locale]\menu                                                                |         18 |        215 |          3 |         70 |        288 |
+| app\[locale]\menu\beeld                                                          |          1 |          9 |          0 |          4 |         13 |
+| app\[locale]\menu\buurt                                                          |          2 |         19 |          0 |          4 |         23 |
+| app\[locale]\menu\buurt (Files)                                                  |          1 |         10 |          0 |          1 |         11 |
+| app\[locale]\menu\buurt\buurtteam                                                |          1 |          9 |          0 |          3 |         12 |
+| app\[locale]\menu\contact                                                        |          1 |         20 |          0 |          6 |         26 |
+| app\[locale]\menu\demografie                                                     |          1 |         10 |          0 |          4 |         14 |
+| app\[locale]\menu\historie                                                       |          1 |          9 |          0 |          4 |         13 |
+| app\[locale]\menu\kunst                                                          |          1 |         12 |          0 |          3 |         15 |
+| app\[locale]\menu\nieuws                                                         |          1 |          8 |          0 |          4 |         12 |
+| app\[locale]\menu\praktisch                                                      |          8 |        112 |          0 |         34 |        146 |
+| app\[locale]\menu\praktisch (Files)                                              |          1 |         12 |          0 |          4 |         16 |
+| app\[locale]\menu\praktisch\afvalcontainers                                      |          1 |         23 |          0 |          4 |         27 |
+| app\[locale]\menu\praktisch\dienstverlening                                      |          1 |         10 |          0 |          3 |         13 |
+| app\[locale]\menu\praktisch\grofvuil                                             |          1 |          8 |          0 |          3 |         11 |
+| app\[locale]\menu\praktisch\horeca                                               |          1 |         18 |          0 |          5 |         23 |
+| app\[locale]\menu\praktisch\ov                                                   |          1 |          9 |          0 |          4 |         13 |
+| app\[locale]\menu\praktisch\winkels                                              |          1 |         15 |          0 |          3 |         18 |
+| app\[locale]\menu\praktisch\zorg                                                 |          1 |         17 |          0 |          8 |         25 |
+| app\[locale]\menu\staatslieden                                                   |          1 |          8 |          3 |          4 |         15 |
+| app\[locale]\menu\westergas                                                      |          1 |          8 |          0 |          3 |         11 |
+| app\[locale]\postsByUserId                                                       |          2 |         34 |          1 |         11 |         46 |
+| app\[locale]\postsByUserId\[postId]                                              |          2 |         34 |          1 |         11 |         46 |
+| app\[locale]\profile                                                             |          1 |          8 |          0 |          3 |         11 |
+| app\[locale]\register                                                            |          1 |          6 |          0 |          3 |          9 |
+| app\[locale]\sharedpost                                                          |          1 |         16 |          1 |         10 |         27 |
+| app\[locale]\sharedpost\[postId]                                                 |          1 |         16 |          1 |         10 |         27 |
+| app\[locale]\weatherreport                                                       |          1 |          7 |          0 |          3 |         10 |
+| app\api                                                                          |         19 |        891 |         63 |        241 |      1,195 |
+| app\api\auth                                                                     |          2 |          7 |          0 |          6 |         13 |
+| app\api\auth\[...nextauth]                                                       |          1 |          7 |          0 |          5 |         12 |
+| app\api\auth\login                                                               |          1 |          0 |          0 |          1 |          1 |
+| app\api\comments                                                                 |          2 |        133 |         11 |         36 |        180 |
+| app\api\comments (Files)                                                         |          1 |         71 |          2 |         17 |         90 |
+| app\api\comments\[commentId]                                                     |          1 |         62 |          9 |         19 |         90 |
+| app\api\comments\[commentId]\like                                                |          1 |         62 |          9 |         19 |         90 |
+| app\api\deleteAllNotifications                                                   |          1 |         27 |          0 |          3 |         30 |
+| app\api\deleteComment                                                            |          1 |         60 |          5 |         14 |         79 |
+| app\api\deleteComment\[commentId]                                                |          1 |         60 |          5 |         14 |         79 |
+| app\api\deleteImage                                                              |          1 |         31 |          0 |         11 |         42 |
+| app\api\deleteImage\[postId]                                                     |          1 |         31 |          0 |         11 |         42 |
+| app\api\deletepost                                                               |          1 |         68 |          6 |         12 |         86 |
+| app\api\deletepost\[postId]                                                      |          1 |         68 |          6 |         12 |         86 |
+| app\api\editComment                                                              |          1 |         38 |          1 |         14 |         53 |
+| app\api\editComment\[commentId]                                                  |          1 |         38 |          1 |         14 |         53 |
+| app\api\editpost                                                                 |          1 |         57 |          4 |         17 |         78 |
+| app\api\editpost\[postId]                                                        |          1 |         57 |          4 |         17 |         78 |
+| app\api\editprofile                                                              |          1 |         73 |          3 |         23 |         99 |
+| app\api\getNotifications                                                         |          1 |         36 |          4 |         12 |         52 |
+| app\api\getSinglePost                                                            |          1 |         40 |          3 |         13 |         56 |
+| app\api\getSinglePost\[postId]                                                   |          1 |         40 |          3 |         13 |         56 |
+| app\api\getposts                                                                 |          1 |         42 |          4 |         13 |         59 |
+| app\api\getposts\[[...slug]]                                                     |          1 |         42 |          4 |         13 |         59 |
+| app\api\getuserinfo                                                              |          1 |         23 |          0 |          5 |         28 |
+| app\api\getuserinfo\[id]                                                         |          1 |         23 |          0 |          5 |         28 |
+| app\api\lock-ttl                                                                 |          1 |         11 |          0 |          4 |         15 |
+| app\api\posts                                                                    |          2 |        195 |         20 |         47 |        262 |
+| app\api\posts (Files)                                                            |          1 |        142 |         18 |         34 |        194 |
+| app\api\posts\[postId]                                                           |          1 |         53 |          2 |         13 |         68 |
+| app\api\posts\[postId]\like                                                      |          1 |         53 |          2 |         13 |         68 |
+| app\api\register                                                                 |          1 |         50 |          2 |         11 |         63 |
+| components                                                                       |         88 |      5,951 |        124 |        821 |      6,896 |
+| components (Files)                                                               |         43 |      2,746 |        111 |        468 |      3,325 |
+| components\hoofdmenu                                                             |         33 |      2,299 |         11 |        250 |      2,560 |
+| components\hoofdmenu\beeld                                                       |          1 |         72 |          6 |          9 |         87 |
+| components\hoofdmenu\buurt                                                       |          9 |        615 |          1 |         51 |        667 |
+| components\hoofdmenu\historie                                                    |          1 |        143 |          1 |         21 |        165 |
+| components\hoofdmenu\infographics                                                |          7 |        718 |          0 |         64 |        782 |
+| components\hoofdmenu\infographics (Files)                                        |          6 |        611 |          0 |         53 |        664 |
+| components\hoofdmenu\infographics\charts                                         |          1 |        107 |          0 |         11 |        118 |
+| components\hoofdmenu\kunst                                                       |          1 |          8 |          0 |          2 |         10 |
+| components\hoofdmenu\praktisch                                                   |         11 |        657 |          0 |         85 |        742 |
+| components\hoofdmenu\praktisch (Files)                                           |          1 |        128 |          0 |          9 |        137 |
+| components\hoofdmenu\praktisch\grofvuil                                          |          2 |        137 |          0 |         18 |        155 |
+| components\hoofdmenu\praktisch\horeca                                            |          1 |         58 |          0 |          6 |         64 |
+| components\hoofdmenu\praktisch\ov                                                |          5 |        240 |          0 |         37 |        277 |
+| components\hoofdmenu\praktisch\winkels                                           |          1 |         50 |          0 |          7 |         57 |
+| components\hoofdmenu\praktisch\zorg                                              |          1 |         44 |          0 |          8 |         52 |
+| components\hoofdmenu\staatslieden                                                |          2 |         75 |          3 |         16 |         94 |
+| components\hoofdmenu\westergas                                                   |          1 |         11 |          0 |          2 |         13 |
+| components\praktisch                                                             |         10 |        582 |          0 |         64 |        646 |
+| components\praktisch (Files)                                                     |          9 |        538 |          0 |         56 |        594 |
+| components\praktisch\zorg                                                        |          1 |         44 |          0 |          8 |         52 |
+| components\ui                                                                    |          2 |        324 |          2 |         39 |        365 |
+| config                                                                           |          1 |          7 |          0 |          3 |         10 |
+| connectDB                                                                        |          1 |         28 |          5 |         10 |         43 |
+| context                                                                          |          1 |         15 |          0 |          6 |         21 |
+| data                                                                             |          9 |      1,523 |          0 |         10 |      1,533 |
+| helper                                                                           |          4 |         88 |          5 |         22 |        115 |
+| hooks                                                                            |          1 |        250 |         38 |         43 |        331 |
+| i18n                                                                             |          3 |         22 |          6 |          9 |         37 |
+| lib                                                                              |          4 |         62 |          6 |         15 |         83 |
+| messages                                                                         |          2 |        291 |          0 |          3 |        294 |
+| models                                                                           |          7 |        167 |          2 |         31 |        200 |
+| utils                                                                            |          9 |        323 |        253 |        105 |        681 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                         | language           | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| g:\sl_refactor\.eslintrc.json                                                    | JSON with Comments |          3 |          0 |          1 |          4 |
+| g:\sl_refactor\.prettierrc                                                       | JSON               |          4 |          0 |          1 |          5 |
+| g:\sl_refactor\README.md                                                         | Markdown           |          7 |          0 |          8 |         15 |
+| g:\sl_refactor\app\[locale]\layout.jsx                                           | JavaScript JSX     |         40 |          4 |          8 |         52 |
+| g:\sl_refactor\app\[locale]\leesditeerst\page.jsx                                | JavaScript JSX     |          7 |          0 |          3 |         10 |
+| g:\sl_refactor\app\[locale]\login\page.jsx                                       | JavaScript JSX     |          8 |          0 |          2 |         10 |
+| g:\sl_refactor\app\[locale]\menu\beeld\page.jsx                                  | JavaScript JSX     |          9 |          0 |          4 |         13 |
+| g:\sl_refactor\app\[locale]\menu\buurt\buurtteam\page.jsx                        | JavaScript JSX     |          9 |          0 |          3 |         12 |
+| g:\sl_refactor\app\[locale]\menu\buurt\layout.jsx                                | JavaScript JSX     |         10 |          0 |          1 |         11 |
+| g:\sl_refactor\app\[locale]\menu\contact\page.jsx                                | JavaScript JSX     |         20 |          0 |          6 |         26 |
+| g:\sl_refactor\app\[locale]\menu\demografie\page.jsx                             | JavaScript JSX     |         10 |          0 |          4 |         14 |
+| g:\sl_refactor\app\[locale]\menu\historie\page.jsx                               | JavaScript JSX     |          9 |          0 |          4 |         13 |
+| g:\sl_refactor\app\[locale]\menu\kunst\page.jsx                                  | JavaScript JSX     |         12 |          0 |          3 |         15 |
+| g:\sl_refactor\app\[locale]\menu\nieuws\page.jsx                                 | JavaScript JSX     |          8 |          0 |          4 |         12 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\afvalcontainers\page.jsx              | JavaScript JSX     |         23 |          0 |          4 |         27 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\dienstverlening\page.jsx              | JavaScript JSX     |         10 |          0 |          3 |         13 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\grofvuil\page.jsx                     | JavaScript JSX     |          8 |          0 |          3 |         11 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\horeca\page.jsx                       | JavaScript JSX     |         18 |          0 |          5 |         23 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\layout.jsx                            | JavaScript JSX     |         12 |          0 |          4 |         16 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\ov\page.jsx                           | JavaScript JSX     |          9 |          0 |          4 |         13 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\winkels\page.jsx                      | JavaScript JSX     |         15 |          0 |          3 |         18 |
+| g:\sl_refactor\app\[locale]\menu\praktisch\zorg\page.jsx                         | JavaScript JSX     |         17 |          0 |          8 |         25 |
+| g:\sl_refactor\app\[locale]\menu\staatslieden\page.jsx                           | JavaScript JSX     |          8 |          3 |          4 |         15 |
+| g:\sl_refactor\app\[locale]\menu\westergas\page.jsx                              | JavaScript JSX     |          8 |          0 |          3 |         11 |
+| g:\sl_refactor\app\[locale]\not-found.jsx                                        | JavaScript JSX     |         28 |          0 |          3 |         31 |
+| g:\sl_refactor\app\[locale]\page.js                                              | JavaScript         |         15 |          0 |          5 |         20 |
+| g:\sl_refactor\app\[locale]\postsByUserId\[postId]\layout.jsx                    | JavaScript JSX     |          7 |          0 |          2 |          9 |
+| g:\sl_refactor\app\[locale]\postsByUserId\[postId]\page.jsx                      | JavaScript JSX     |         27 |          1 |          9 |         37 |
+| g:\sl_refactor\app\[locale]\profile\page.jsx                                     | JavaScript JSX     |          8 |          0 |          3 |         11 |
+| g:\sl_refactor\app\[locale]\register\page.jsx                                    | JavaScript JSX     |          6 |          0 |          3 |          9 |
+| g:\sl_refactor\app\[locale]\sharedpost\[postId]\page.jsx                         | JavaScript JSX     |         16 |          1 |         10 |         27 |
+| g:\sl_refactor\app\[locale]\weatherreport\page.jsx                               | JavaScript JSX     |          7 |          0 |          3 |         10 |
+| g:\sl_refactor\app\api\auth\[...nextauth]\route.js                               | JavaScript         |          7 |          0 |          5 |         12 |
+| g:\sl_refactor\app\api\auth\login\route.js                                       | JavaScript         |          0 |          0 |          1 |          1 |
+| g:\sl_refactor\app\api\comments\[commentId]\like\route.js                        | JavaScript         |         62 |          9 |         19 |         90 |
+| g:\sl_refactor\app\api\comments\route.js                                         | JavaScript         |         71 |          2 |         17 |         90 |
+| g:\sl_refactor\app\api\deleteAllNotifications\route.js                           | JavaScript         |         27 |          0 |          3 |         30 |
+| g:\sl_refactor\app\api\deleteComment\[commentId]\route.js                        | JavaScript         |         60 |          5 |         14 |         79 |
+| g:\sl_refactor\app\api\deleteImage\[postId]\route.js                             | JavaScript         |         31 |          0 |         11 |         42 |
+| g:\sl_refactor\app\api\deletepost\[postId]\route.js                              | JavaScript         |         68 |          6 |         12 |         86 |
+| g:\sl_refactor\app\api\editComment\[commentId]\route.js                          | JavaScript         |         38 |          1 |         14 |         53 |
+| g:\sl_refactor\app\api\editpost\[postId]\route.js                                | JavaScript         |         57 |          4 |         17 |         78 |
+| g:\sl_refactor\app\api\editprofile\route.js                                      | JavaScript         |         73 |          3 |         23 |         99 |
+| g:\sl_refactor\app\api\getNotifications\route.js                                 | JavaScript         |         36 |          4 |         12 |         52 |
+| g:\sl_refactor\app\api\getSinglePost\[postId]\route.js                           | JavaScript         |         40 |          3 |         13 |         56 |
+| g:\sl_refactor\app\api\getposts\[[...slug]]\route.js                             | JavaScript         |         42 |          4 |         13 |         59 |
+| g:\sl_refactor\app\api\getuserinfo\[id]\route.js                                 | JavaScript         |         23 |          0 |          5 |         28 |
+| g:\sl_refactor\app\api\lock-ttl\route.js                                         | JavaScript         |         11 |          0 |          4 |         15 |
+| g:\sl_refactor\app\api\posts\[postId]\like\route.js                              | JavaScript         |         53 |          2 |         13 |         68 |
+| g:\sl_refactor\app\api\posts\route.js                                            | JavaScript         |        142 |         18 |         34 |        194 |
+| g:\sl_refactor\app\api\register\route.js                                         | JavaScript         |         50 |          2 |         11 |         63 |
+| g:\sl_refactor\app\globals.css                                                   | PostCSS            |        132 |          5 |         26 |        163 |
+| g:\sl_refactor\components.json                                                   | JSON               |         22 |          0 |          0 |         22 |
+| g:\sl_refactor\components\AddPost.jsx                                            | JavaScript JSX     |         53 |          2 |         10 |         65 |
+| g:\sl_refactor\components\AddPostModal.jsx                                       | JavaScript JSX     |        141 |          3 |         25 |        169 |
+| g:\sl_refactor\components\AuthProvider.jsx                                       | JavaScript JSX     |          6 |          0 |          3 |          9 |
+| g:\sl_refactor\components\ClientSpinner.jsx                                      | JavaScript JSX     |          4 |          0 |          1 |          5 |
+| g:\sl_refactor\components\CloseSinglePostButton.jsx                              | JavaScript JSX     |         16 |          0 |          4 |         20 |
+| g:\sl_refactor\components\Comment.jsx                                            | JavaScript JSX     |        130 |          1 |         17 |        148 |
+| g:\sl_refactor\components\CommentOptions.jsx                                     | JavaScript JSX     |         70 |          0 |          8 |         78 |
+| g:\sl_refactor\components\EditCommentForm.jsx                                    | JavaScript JSX     |         76 |          3 |         19 |         98 |
+| g:\sl_refactor\components\EditPostForm.jsx                                       | JavaScript JSX     |        236 |          9 |         36 |        281 |
+| g:\sl_refactor\components\Editordelete.jsx                                       | JavaScript JSX     |         62 |          0 |          9 |         71 |
+| g:\sl_refactor\components\Footer.jsx                                             | JavaScript JSX     |          8 |          0 |          5 |         13 |
+| g:\sl_refactor\components\GetAllPosts.jsx                                        | JavaScript JSX     |         45 |          1 |         11 |         57 |
+| g:\sl_refactor\components\Hamburger.jsx                                          | JavaScript JSX     |         18 |          0 |          6 |         24 |
+| g:\sl_refactor\components\LanguageSwitcher.jsx                                   | JavaScript JSX     |         24 |         13 |          9 |         46 |
+| g:\sl_refactor\components\LeesDit.jsx                                            | JavaScript JSX     |         34 |          0 |          6 |         40 |
+| g:\sl_refactor\components\LeesDitEerst.jsx                                       | JavaScript JSX     |         50 |          0 |          7 |         57 |
+| g:\sl_refactor\components\LikeAndShareButtons.jsx                                | JavaScript JSX     |         53 |          1 |         11 |         65 |
+| g:\sl_refactor\components\LikeButton.jsx                                         | JavaScript JSX     |         25 |          1 |          5 |         31 |
+| g:\sl_refactor\components\LikeandShareBar.jsx                                    | JavaScript JSX     |         10 |          0 |          3 |         13 |
+| g:\sl_refactor\components\LoginForm.jsx                                          | JavaScript JSX     |        165 |          2 |         20 |        187 |
+| g:\sl_refactor\components\LoginRegisterLogout.jsx                                | JavaScript JSX     |         56 |          0 |         11 |         67 |
+| g:\sl_refactor\components\Menu.jsx                                               | JavaScript JSX     |         38 |          2 |          7 |         47 |
+| g:\sl_refactor\components\MenuOverlay.jsx                                        | JavaScript JSX     |         48 |          0 |          6 |         54 |
+| g:\sl_refactor\components\Navbar.jsx                                             | JavaScript JSX     |         37 |          0 |          7 |         44 |
+| g:\sl_refactor\components\NavbarNotificationBadge.jsx                            | JavaScript JSX     |         47 |          0 |          9 |         56 |
+| g:\sl_refactor\components\NotificationListItems.jsx                              | JavaScript JSX     |         78 |          0 |          6 |         84 |
+| g:\sl_refactor\components\PostComment.jsx                                        | JavaScript JSX     |         58 |          4 |          9 |         71 |
+| g:\sl_refactor\components\PostCommentForm.jsx                                    | JavaScript JSX     |         85 |          0 |         19 |        104 |
+| g:\sl_refactor\components\PostUserName.jsx                                       | JavaScript JSX     |         19 |          0 |          5 |         24 |
+| g:\sl_refactor\components\ProfileForm.jsx                                        | JavaScript JSX     |        150 |          2 |         25 |        177 |
+| g:\sl_refactor\components\RegisterForm.jsx                                       | JavaScript JSX     |        161 |          0 |         17 |        178 |
+| g:\sl_refactor\components\SharedPost.jsx                                         | JavaScript JSX     |         60 |          0 |         11 |         71 |
+| g:\sl_refactor\components\SideBarNotificationList.jsx                            | JavaScript JSX     |        114 |         56 |         24 |        194 |
+| g:\sl_refactor\components\SingleNotificationPost.jsx                             | JavaScript JSX     |         23 |          0 |          4 |         27 |
+| g:\sl_refactor\components\SinglePost.jsx                                         | JavaScript JSX     |        120 |          2 |         22 |        144 |
+| g:\sl_refactor\components\Spinner.jsx                                            | JavaScript JSX     |         20 |          4 |          6 |         30 |
+| g:\sl_refactor\components\TitleBar.jsx                                           | JavaScript JSX     |          9 |          0 |          3 |         12 |
+| g:\sl_refactor\components\ToggleButton.jsx                                       | JavaScript JSX     |         23 |          1 |          6 |         30 |
+| g:\sl_refactor\components\TranslateButton.jsx                                    | JavaScript JSX     |         16 |          0 |          4 |         20 |
+| g:\sl_refactor\components\Weather.jsx                                            | JavaScript JSX     |         63 |          3 |         13 |         79 |
+| g:\sl_refactor\components\Weatherreport.jsx                                      | JavaScript JSX     |         40 |          0 |          5 |         45 |
+| g:\sl_refactor\components\WeerMorgen.jsx                                         | JavaScript JSX     |        127 |          1 |         18 |        146 |
+| g:\sl_refactor\components\WeerVandaag.jsx                                        | JavaScript JSX     |        128 |          0 |         16 |        144 |
+| g:\sl_refactor\components\hoofdmenu\beeld\Beeld.jsx                              | JavaScript JSX     |         72 |          6 |          9 |         87 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Administratie.jsx                      | JavaScript JSX     |         56 |          0 |          2 |         58 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Buurtteam.jsx                          | JavaScript JSX     |        121 |          1 |         21 |        143 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Financien.jsx                          | JavaScript JSX     |         62 |          0 |          3 |         65 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Gezondheid.jsx                         | JavaScript JSX     |         85 |          0 |          3 |         88 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Huisvesting.jsx                        | JavaScript JSX     |         51 |          0 |          2 |         53 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Ontmoeten.jsx                          | JavaScript JSX     |        105 |          0 |          9 |        114 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Veiligheid.jsx                         | JavaScript JSX     |         50 |          0 |          5 |         55 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Werk.jsx                               | JavaScript JSX     |         41 |          0 |          2 |         43 |
+| g:\sl_refactor\components\hoofdmenu\buurt\Zorg.jsx                               | JavaScript JSX     |         44 |          0 |          4 |         48 |
+| g:\sl_refactor\components\hoofdmenu\historie\Historie.jsx                        | JavaScript JSX     |        143 |          1 |         21 |        165 |
+| g:\sl_refactor\components\hoofdmenu\infographics\EenpersoonshuishoudensChart.jsx | JavaScript JSX     |         99 |          0 |          9 |        108 |
+| g:\sl_refactor\components\hoofdmenu\infographics\GemiddeldeHuurPrijsChart.jsx    | JavaScript JSX     |         94 |          0 |          9 |        103 |
+| g:\sl_refactor\components\hoofdmenu\infographics\InkomensChart.jsx               | JavaScript JSX     |         98 |          0 |          9 |        107 |
+| g:\sl_refactor\components\hoofdmenu\infographics\InwonersChart.jsx               | JavaScript JSX     |         76 |          0 |         10 |         86 |
+| g:\sl_refactor\components\hoofdmenu\infographics\LeeftijdscategorieenChart.jsx   | JavaScript JSX     |        122 |          0 |          9 |        131 |
+| g:\sl_refactor\components\hoofdmenu\infographics\WoonoppervlakChart.jsx          | JavaScript JSX     |        122 |          0 |          7 |        129 |
+| g:\sl_refactor\components\hoofdmenu\infographics\charts\AllCharts.jsx            | JavaScript JSX     |        107 |          0 |         11 |        118 |
+| g:\sl_refactor\components\hoofdmenu\kunst\KunstEnCultuur.jsx                     | JavaScript JSX     |          8 |          0 |          2 |         10 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\IconsMenu.jsx                      | JavaScript JSX     |        128 |          0 |          9 |        137 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\grofvuil\Grofvuil.jsx              | JavaScript JSX     |        102 |          0 |         12 |        114 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\grofvuil\WatWeOphalen.jsx          | JavaScript JSX     |         35 |          0 |          6 |         41 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\horeca\Horeca.jsx                  | JavaScript JSX     |         58 |          0 |          6 |         64 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\ov\AlleHaltesTram5.jsx             | JavaScript JSX     |         35 |          0 |          5 |         40 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\ov\AllehaltesBus21.jsx             | JavaScript JSX     |         35 |          0 |          4 |         39 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\ov\Buslijn21.jsx                   | JavaScript JSX     |         53 |          0 |          6 |         59 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\ov\Ov.jsx                          | JavaScript JSX     |         66 |          0 |         15 |         81 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\ov\Tramlijn5.jsx                   | JavaScript JSX     |         51 |          0 |          7 |         58 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\winkels\Winkelbestand.jsx          | JavaScript JSX     |         50 |          0 |          7 |         57 |
+| g:\sl_refactor\components\hoofdmenu\praktisch\zorg\AlleZorgInstanties.jsx        | JavaScript JSX     |         44 |          0 |          8 |         52 |
+| g:\sl_refactor\components\hoofdmenu\staatslieden\Description.jsx                 | JavaScript JSX     |         15 |          0 |          4 |         19 |
+| g:\sl_refactor\components\hoofdmenu\staatslieden\Staatslieden.jsx                | JavaScript JSX     |         60 |          3 |         12 |         75 |
+| g:\sl_refactor\components\hoofdmenu\westergas\WesterGas.jsx                      | JavaScript JSX     |         11 |          0 |          2 |         13 |
+| g:\sl_refactor\components\praktisch\AlleHaltesTram19.jsx                         | JavaScript JSX     |         35 |          0 |          5 |         40 |
+| g:\sl_refactor\components\praktisch\AllehaltesBus21.jsx                          | JavaScript JSX     |         35 |          0 |          4 |         39 |
+| g:\sl_refactor\components\praktisch\Buslijn21.jsx                                | JavaScript JSX     |         53 |          0 |          6 |         59 |
+| g:\sl_refactor\components\praktisch\Grofvuil.jsx                                 | JavaScript JSX     |        103 |          0 |          9 |        112 |
+| g:\sl_refactor\components\praktisch\Horeca.jsx                                   | JavaScript JSX     |         49 |          0 |          5 |         54 |
+| g:\sl_refactor\components\praktisch\IconsMenu.jsx                                | JavaScript JSX     |        128 |          0 |          9 |        137 |
+| g:\sl_refactor\components\praktisch\Tramlijn19.jsx                               | JavaScript JSX     |         51 |          0 |          7 |         58 |
+| g:\sl_refactor\components\praktisch\WatWeOphalen.jsx                             | JavaScript JSX     |         35 |          0 |          6 |         41 |
+| g:\sl_refactor\components\praktisch\Winkelbestand.jsx                            | JavaScript JSX     |         49 |          0 |          5 |         54 |
+| g:\sl_refactor\components\praktisch\zorg\AlleZorgInstanties.jsx                  | JavaScript JSX     |         44 |          0 |          8 |         52 |
+| g:\sl_refactor\components\ui\card.jsx                                            | JavaScript JSX     |         45 |          0 |          9 |         54 |
+| g:\sl_refactor\components\ui\chart.jsx                                           | JavaScript JSX     |        279 |          2 |         30 |        311 |
+| g:\sl_refactor\config\cloudinary.js                                              | JavaScript         |          7 |          0 |          3 |         10 |
+| g:\sl_refactor\connectDB\database.js                                             | JavaScript         |         28 |          5 |         10 |         43 |
+| g:\sl_refactor\context\LanguageContext.js                                        | JavaScript         |         15 |          0 |          6 |         21 |
+| g:\sl_refactor\data\adressen.json                                                | JSON               |        285 |          0 |          1 |        286 |
+| g:\sl_refactor\data\beeldToenEnNu.json                                           | JSON               |        322 |          0 |          1 |        323 |
+| g:\sl_refactor\data\grofvuil.json                                                | JSON               |         28 |          0 |          0 |         28 |
+| g:\sl_refactor\data\haltesbuslijn21.json                                         | JSON               |         34 |          0 |          2 |         36 |
+| g:\sl_refactor\data\haltestramlijn5.json                                         | JSON               |         33 |          0 |          1 |         34 |
+| g:\sl_refactor\data\horeca.json                                                  | JSON               |        314 |          0 |          1 |        315 |
+| g:\sl_refactor\data\menuItems.json                                               | JSON               |         26 |          0 |          1 |         27 |
+| g:\sl_refactor\data\straatnamen.json                                             | JSON               |        211 |          0 |          2 |        213 |
+| g:\sl_refactor\data\winkelbestand.json                                           | JSON               |        270 |          0 |          1 |        271 |
+| g:\sl_refactor\helper\convertSunsetAndSunrise.js                                 | JavaScript         |         14 |          1 |          5 |         20 |
+| g:\sl_refactor\helper\convertTime.js                                             | JavaScript         |         11 |          0 |          4 |         15 |
+| g:\sl_refactor\helper\getSunriseAndSunset.js                                     | JavaScript         |         14 |          2 |          4 |         20 |
+| g:\sl_refactor\helper\getWeatherData.js                                          | JavaScript         |         49 |          2 |          9 |         60 |
+| g:\sl_refactor\hooks\usePostActions.js                                           | JavaScript         |        250 |         38 |         43 |        331 |
+| g:\sl_refactor\i18n\navigation.js                                                | JavaScript         |          4 |          2 |          2 |          8 |
+| g:\sl_refactor\i18n\request.js                                                   | JavaScript         |         13 |          2 |          4 |         19 |
+| g:\sl_refactor\i18n\routing.js                                                   | JavaScript         |          5 |          2 |          3 |         10 |
+| g:\sl_refactor\jsconfig.json                                                     | JSON with Comments |          7 |          0 |          1 |          8 |
+| g:\sl_refactor\lib\db.ts                                                         | TypeScript         |         28 |          6 |          6 |         40 |
+| g:\sl_refactor\lib\loginLock.js                                                  | JavaScript         |         13 |          0 |          4 |         17 |
+| g:\sl_refactor\lib\rateLimit.js                                                  | JavaScript         |         16 |          0 |          3 |         19 |
+| g:\sl_refactor\lib\utils.js                                                      | JavaScript         |          5 |          0 |          2 |          7 |
+| g:\sl_refactor\messages\en.json                                                  | JSON               |        145 |          0 |          1 |        146 |
+| g:\sl_refactor\messages\nl.json                                                  | JSON               |        146 |          0 |          2 |        148 |
+| g:\sl_refactor\middleware.js                                                     | JavaScript         |          6 |          3 |          3 |         12 |
+| g:\sl_refactor\models\User.js                                                    | JavaScript         |         38 |          2 |          6 |         46 |
+| g:\sl_refactor\models\avatar.js                                                  | JavaScript         |         26 |          0 |          5 |         31 |
+| g:\sl_refactor\models\comment.js                                                 | JavaScript         |         31 |          0 |          6 |         37 |
+| g:\sl_refactor\models\commentLikes.js                                            | JavaScript         |         13 |          0 |          3 |         16 |
+| g:\sl_refactor\models\notification.js                                            | JavaScript         |         14 |          0 |          3 |         17 |
+| g:\sl_refactor\models\post.js                                                    | JavaScript         |         33 |          0 |          5 |         38 |
+| g:\sl_refactor\models\postLikes.js                                               | JavaScript         |         12 |          0 |          3 |         15 |
+| g:\sl_refactor\next.config.mjs                                                   | JavaScript         |         51 |          1 |          5 |         57 |
+| g:\sl_refactor\package-lock.json                                                 | JSON               |     10,662 |          0 |          1 |     10,663 |
+| g:\sl_refactor\package.json                                                      | JSON               |         62 |          0 |          1 |         63 |
+| g:\sl_refactor\postcss.config.mjs                                                | JavaScript         |          7 |          1 |          1 |          9 |
+| g:\sl_refactor\tailwind.config.js                                                | JavaScript         |        110 |          1 |          1 |        112 |
+| g:\sl_refactor\utils\authOptions.js                                              | JavaScript         |        156 |         32 |         36 |        224 |
+| g:\sl_refactor\utils\deleteComment.js                                            | JavaScript         |         19 |          0 |          5 |         24 |
+| g:\sl_refactor\utils\deleteImageFromCloudinary.js                                | JavaScript         |          9 |          0 |          2 |         11 |
+| g:\sl_refactor\utils\getNotifications.js                                         | JavaScript         |         20 |          0 |          6 |         26 |
+| g:\sl_refactor\utils\getPostWithComments.js                                      | JavaScript         |         70 |          1 |          5 |         76 |
+| g:\sl_refactor\utils\getSessionUser.js                                           | JavaScript         |         17 |          0 |          3 |         20 |
+| g:\sl_refactor\utils\optimisticUpdate.js                                         | JavaScript         |          0 |        164 |         24 |        188 |
+| g:\sl_refactor\utils\postsRequest.js                                             | JavaScript         |         20 |         56 |         20 |         96 |
+| g:\sl_refactor\utils\revalidatePost.js                                           | JavaScript         |         12 |          0 |          4 |         16 |
+| Total                                                                            |                    |     21,075 |        522 |      1,489 |     23,086 |
++----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
