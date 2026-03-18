@@ -57,10 +57,12 @@ const LoginForm = () => {
       }
 
       if (res?.error) {
+          const [errorType, remaining] = res.error.split(":");
         if (
           res.error === "RATE_LIMIT_ACCOUNT" ||
           res.error === "ACCOUNT_LOCKED"
         ) {
+          //Get lock time from api => 60 sec
           const response = await fetch(`/api/lock-ttl?email=${email}`);
 
           if (response.ok) {
@@ -69,12 +71,10 @@ const LoginForm = () => {
             setCountDown(data.ttl || 60);
             setMessage("Account tijdelijk geblokkeerd.");
           }
-        }else if(res.error === "INVALID_CREDENTIALS"){
-          setLoginMessage("Ongeldige inloggegevens!")
-          setTimeout(() => setLoginMessage(""), 1500);
+        }else if(errorType === "INVALID_CREDENTIALS"){
+          setLoginMessage(`Ongeldige inloggegevens! Nog ${remaining} pogingen.`)
+          setTimeout(() => setLoginMessage(""), 2000);
         }
-
-        
       }
     } catch (error) {
       console.log(error);

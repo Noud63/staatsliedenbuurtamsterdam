@@ -80,19 +80,19 @@ async authorize(credentials, req) {
       req?.socket?.remoteAddress ||
       "unknown";
 
-    // 1️⃣ Check account lock
+    // Check account lock
     const locked = await isAccountLocked(email);
     if (locked) {
       throw new Error("ACCOUNT_LOCKED");
     }
 
-    // 2️⃣ IP limiter
+    // IP limiter
     const { success: ipSuccess } = await ipLimiter.limit(ip);
     if (!ipSuccess) {
       throw new Error("RATE_LIMIT_IP");
     }
 
-    // 3️⃣ Account limiter
+    // Account limiter
     const { success: accountSuccess, remaining } = await accountLimiter.limit(email);
 
     if (!accountSuccess || remaining === 0) {
@@ -108,7 +108,7 @@ async authorize(credentials, req) {
       !dbUser ||
       !(await bcrypt.compare(credentials.password, dbUser.password))
     ) {
-      throw new Error("INVALID_CREDENTIALS");
+      throw new Error(`INVALID_CREDENTIALS:${remaining}`);
     }
 
     // successful login → clear lock
