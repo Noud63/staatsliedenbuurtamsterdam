@@ -69,8 +69,6 @@ export const authOptions = {
       },
 
       async authorize(credentials, req) {
-
-        console.log("AUTHORIZE CALLED");
         try {
           if (!credentials?.email || !credentials?.password) {
             throw new Error("MISSING_CREDENTIALS");
@@ -79,54 +77,41 @@ export const authOptions = {
           const email = credentials.email.toLowerCase();
 
           const ip =
-            req?.headers?.["x-forwarded-for"] ||
+            req?.headers?.["x-forwarded-for"]?.split(",")[0] ||
             req?.socket?.remoteAddress ||
             "unknown";
 
           const identifier = `${ip}`;
 
-          // Check if account is locked
+          // Check account lock
           const locked = await isAccountLocked(email);
           if (locked) {
             throw new Error("ACCOUNT_LOCKED");
           }
 
-          // Rate limit
-          const { success: ipSuccess } = await ipLimiter.limit(identifier);
-
+          // IP rate limit
+          const { success: ipSuccess } = await ipLimiter.limit(ip);
           if (!ipSuccess) {
             throw new Error("RATE_LIMIT_IP");
           }
 
+          // Account rate limit
           const { success: accountSuccess } = await accountLimiter.limit(email);
-
           if (!accountSuccess) {
+            await lockAccount(email);
             throw new Error("RATE_LIMIT_ACCOUNT");
           }
-
-          console.log("Rate limit:", { accountSuccess });
-
           await connectDB();
 
           const dbUser = await User.findOne({ email }).select("+password");
 
-          if (!dbUser || !(await bcrypt.compare(
-            credentials.password,
-            dbUser.password)
-          )) {
+          if (
+            !dbUser ||
+            !(await bcrypt.compare(credentials.password, dbUser.password))
+          ) {
             await registerFailedAttempt(email);
             throw new Error("INVALID_CREDENTIALS");
           }
-
-          // const match = await bcrypt.compare(
-          //   credentials.password,
-          //   dbUser.password,
-          // );
-
-          // if (!match) {
-          //   await registerFailedAttempt(email); // ← PUT IT HERE
-          //   throw new Error("INVALID_CREDENTIALS");
-          // }
 
           // Successful login → remove lock
           await resetLoginAttempts(email);
