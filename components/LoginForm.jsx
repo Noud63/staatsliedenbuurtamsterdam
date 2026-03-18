@@ -17,6 +17,7 @@ const LoginForm = () => {
   const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [message, setMessage] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
   const [countDown, setCountDown] = useState(60);
 
   const router = useRouter();
@@ -40,7 +41,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-            if (disabled) return;
+    if (disabled) return;
     try {
       const res = await signIn("credentials", {
         email,
@@ -56,34 +57,30 @@ const LoginForm = () => {
       }
 
       if (res?.error) {
-        if (res.error === "RATE_LIMIT") {
-          setDisabled(true);
-          setCountDown(60);
-          setMessage("Te veel pogingen.");
-        } else if (res.error === "ACCOUNT_LOCKED") {
-          setDisabled(true);
-          setCountDown(60);
-          setMessage("Account tijdelijk geblokkeerd.");
+        if (
+          res.error === "RATE_LIMIT_ACCOUNT" ||
+          res.error === "ACCOUNT_LOCKED"
+        ) {
+          const response = await fetch(`/api/lock-ttl?email=${email}`);
+
+          if (response.ok) {
+            const data = await response.json();
+            setDisabled(true);
+            setCountDown(data.ttl || 60);
+            setMessage("Account tijdelijk geblokkeerd.");
+          }
+        }else if(res.error === "INVALID_CREDENTIALS"){
+          setLoginMessage("Ongeldige inloggegevens!")
+          setTimeout(() => setLoginMessage(""), 1500);
         }
 
-        setError(true);
-        setTimeout(() => {
-          setError(false);
-        }, 1500);
+        
       }
     } catch (error) {
-      console.log(error, { message: error.message });
+      console.log(error);
     } finally {
       setEmail("");
       setPassword("");
-    }
-  };
-
-  const closeWarning = () => {
-    if (message) {
-      setTimeout(() => {
-        setMessage("");
-      }, 2000);
     }
   };
 
@@ -124,10 +121,10 @@ const LoginForm = () => {
             />
           </div>
 
-          {error && (
+          {loginMessage && (
             <div className="flex w-full flex-row items-center rounded-md bg-red-100 px-4 py-3">
               <CircleX size={20} color="darkred" className="mr-2" />
-              <span className="text-red-800">Ongeldige inloggegevens!</span>
+              <span className="text-red-800">{loginMessage}</span>
             </div>
           )}
 
@@ -141,7 +138,9 @@ const LoginForm = () => {
           {message && (
             <div className="flex w-full flex-row items-center rounded-md bg-red-100 px-4 py-3">
               {/* <CircleX size={20} color="darkred" className="mr-2" /> */}
-              <span className="text-red-800">{message} Wacht {countDown} sec en probeer opnieuw.</span>
+              <span className="text-red-800">
+                {message} Wacht {countDown} sec en probeer opnieuw.
+              </span>
             </div>
           )}
 

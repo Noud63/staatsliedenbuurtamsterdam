@@ -10,7 +10,7 @@ import { ipLimiter, accountLimiter } from "@/lib/rateLimit";
 import {
   isAccountLocked,
   resetLoginAttempts,
-  registerFailedAttempt,
+  lockAccount
 } from "@/lib/loginLock";
 
 export const authOptions = {
@@ -67,67 +67,66 @@ export const authOptions = {
           placeholder: "password",
         },
       },
+async authorize(credentials, req) {
+  try {
+    if (!credentials?.email || !credentials?.password) {
+      throw new Error("MISSING_CREDENTIALS");
+    }
 
-      async authorize(credentials, req) {
-        try {
-          if (!credentials?.email || !credentials?.password) {
-            throw new Error("MISSING_CREDENTIALS");
-          }
+    const email = credentials.email.toLowerCase();
 
-          const email = credentials.email.toLowerCase();
+    const ip =
+      req?.headers?.["x-forwarded-for"]?.split(",")[0] ||
+      req?.socket?.remoteAddress ||
+      "unknown";
 
-          const ip =
-            req?.headers?.["x-forwarded-for"]?.split(",")[0] ||
-            req?.socket?.remoteAddress ||
-            "unknown";
+    // 1️⃣ Check account lock
+    const locked = await isAccountLocked(email);
+    if (locked) {
+      throw new Error("ACCOUNT_LOCKED");
+    }
 
-          const identifier = `${ip}`;
+    // 2️⃣ IP limiter
+    const { success: ipSuccess } = await ipLimiter.limit(ip);
+    if (!ipSuccess) {
+      throw new Error("RATE_LIMIT_IP");
+    }
 
-          // Check account lock
-          const locked = await isAccountLocked(email);
-          if (locked) {
-            throw new Error("ACCOUNT_LOCKED");
-          }
+    // 3️⃣ Account limiter
+    const { success: accountSuccess, remaining } = await accountLimiter.limit(email);
 
-          // IP rate limit
-          const { success: ipSuccess } = await ipLimiter.limit(ip);
-          if (!ipSuccess) {
-            throw new Error("RATE_LIMIT_IP");
-          }
+    if (!accountSuccess || remaining === 0) {
+      await lockAccount(email);
+      throw new Error("RATE_LIMIT_ACCOUNT");
+    }
 
-          // Account rate limit
-          const { success: accountSuccess } = await accountLimiter.limit(email);
-          if (!accountSuccess) {
-            await lockAccount(email);
-            throw new Error("RATE_LIMIT_ACCOUNT");
-          }
-          await connectDB();
+    await connectDB();
 
-          const dbUser = await User.findOne({ email }).select("+password");
+    const dbUser = await User.findOne({ email }).select("+password");
 
-          if (
-            !dbUser ||
-            !(await bcrypt.compare(credentials.password, dbUser.password))
-          ) {
-            await registerFailedAttempt(email);
-            throw new Error("INVALID_CREDENTIALS");
-          }
+    if (
+      !dbUser ||
+      !(await bcrypt.compare(credentials.password, dbUser.password))
+    ) {
+      throw new Error("INVALID_CREDENTIALS");
+    }
 
-          // Successful login → remove lock
-          await resetLoginAttempts(email);
+    // successful login → clear lock
+    await resetLoginAttempts(email);
 
-          return {
-            id: dbUser._id.toString(),
-            name: dbUser.name,
-            username: dbUser.username,
-            email: dbUser.email,
-            avatar: dbUser.avatar,
-          };
-        } catch (error) {
-          console.error("Auth error:", error);
-          throw error;
-        }
-      },
+    return {
+      id: dbUser._id.toString(),
+      name: dbUser.name,
+      username: dbUser.username,
+      email: dbUser.email,
+      avatar: dbUser.avatar,
+    };
+
+  } catch (error) {
+    console.error("Auth error:", error);
+    throw error;
+  }
+},
     }),
   ],
 
