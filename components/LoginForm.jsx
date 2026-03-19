@@ -74,6 +74,9 @@ const LoginForm = () => {
         }else if(errorType === "INVALID_CREDENTIALS"){
           setLoginMessage(`Ongeldige inloggegevens! Nog ${remaining} pogingen.`)
           setTimeout(() => setLoginMessage(""), 2000);
+        }else if(res?.error === "INVALID_EMAIL_FORMAT"){
+          setLoginMessage(`Ongeldig e-mailadres.`)
+          setTimeout(() => setLoginMessage(""), 2000);
         }
       }
     } catch (error) {
@@ -123,7 +126,6 @@ const LoginForm = () => {
 
           {loginMessage && (
             <div className="flex w-full flex-row items-center rounded-md bg-red-100 px-4 py-3">
-              <CircleX size={20} color="darkred" className="mr-2" />
               <span className="text-red-800">{loginMessage}</span>
             </div>
           )}
@@ -137,7 +139,6 @@ const LoginForm = () => {
 
           {message && (
             <div className="flex w-full flex-row items-center rounded-md bg-red-100 px-4 py-3">
-              {/* <CircleX size={20} color="darkred" className="mr-2" /> */}
               <span className="text-red-800">
                 {message} Wacht {countDown} sec en probeer opnieuw.
               </span>

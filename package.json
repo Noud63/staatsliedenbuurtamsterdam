@@ -21,6 +21,7 @@
     "cloudinary": "^2.4.0",
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^2.1.1",
+    "email-validator": "^2.0.4",
     "lucide-react": "^0.424.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",

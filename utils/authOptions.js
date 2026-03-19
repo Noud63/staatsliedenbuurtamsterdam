@@ -6,11 +6,11 @@ import bcrypt from "bcrypt";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db";
 import { ipLimiter, accountLimiter } from "@/lib/rateLimit";
-
+import validator from "email-validator";
 import {
   isAccountLocked,
   resetLoginAttempts,
-  lockAccount
+  lockAccount,
 } from "@/lib/loginLock";
 
 export const authOptions = {
@@ -67,66 +67,71 @@ export const authOptions = {
           placeholder: "password",
         },
       },
-async authorize(credentials, req) {
-  try {
-    if (!credentials?.email || !credentials?.password) {
-      throw new Error("MISSING_CREDENTIALS");
-    }
+      async authorize(credentials, req) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("MISSING_CREDENTIALS");
+          }
 
-    const email = credentials.email.toLowerCase();
+          const email = credentials.email.toLowerCase();
 
-    const ip =
-      req?.headers?.["x-forwarded-for"]?.split(",")[0] ||
-      req?.socket?.remoteAddress ||
-      "unknown";
+          const ip =
+            req?.headers?.["x-forwarded-for"]?.split(",")[0] ||
+            req?.socket?.remoteAddress ||
+            "unknown";
 
-    // Check account lock
-    const locked = await isAccountLocked(email);
-    if (locked) {
-      throw new Error("ACCOUNT_LOCKED");
-    }
+          // 1️⃣ Validate email FIRST → no Redis hit
+          if (!validator.validate(email)) {
+            throw new Error("INVALID_EMAIL_FORMAT");
+          }
 
-    // IP limiter
-    const { success: ipSuccess } = await ipLimiter.limit(ip);
-    if (!ipSuccess) {
-      throw new Error("RATE_LIMIT_IP");
-    }
+          // Check account lock
+          const locked = await isAccountLocked(email);
+          if (locked) {
+            throw new Error("ACCOUNT_LOCKED");
+          }
 
-    // Account limiter
-    const { success: accountSuccess, remaining } = await accountLimiter.limit(email);
+          // IP limiter
+          const { success: ipSuccess } = await ipLimiter.limit(ip);
+          if (!ipSuccess) {
+            throw new Error("RATE_LIMIT_IP");
+          }
 
-    if (!accountSuccess || remaining === 0) {
-      await lockAccount(email);
-      throw new Error("RATE_LIMIT_ACCOUNT");
-    }
+          // Account limiter
+          const { success: accountSuccess, remaining } =
+            await accountLimiter.limit(email);
 
-    await connectDB();
+          if (!accountSuccess || remaining === 0) {
+            await lockAccount(email);
+            throw new Error("RATE_LIMIT_ACCOUNT");
+          }
 
-    const dbUser = await User.findOne({ email }).select("+password");
+          await connectDB();
 
-    if (
-      !dbUser ||
-      !(await bcrypt.compare(credentials.password, dbUser.password))
-    ) {
-      throw new Error(`INVALID_CREDENTIALS:${remaining}`);
-    }
+          const dbUser = await User.findOne({ email }).select("+password");
 
-    // successful login → clear lock
-    await resetLoginAttempts(email);
+          if (
+            !dbUser ||
+            !(await bcrypt.compare(credentials.password, dbUser.password))
+          ) {
+            throw new Error(`INVALID_CREDENTIALS:${remaining}`);
+          }
 
-    return {
-      id: dbUser._id.toString(),
-      name: dbUser.name,
-      username: dbUser.username,
-      email: dbUser.email,
-      avatar: dbUser.avatar,
-    };
+          // successful login → clear lock
+          await resetLoginAttempts(email);
 
-  } catch (error) {
-    console.error("Auth error:", error);
-    throw error;
-  }
-},
+          return {
+            id: dbUser._id.toString(),
+            name: dbUser.name,
+            username: dbUser.username,
+            email: dbUser.email,
+            avatar: dbUser.avatar,
+          };
+        } catch (error) {
+          console.error("Auth error:", error);
+          throw error;
+        }
+      },
     }),
   ],
 
